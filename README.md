@@ -1,1 +1,1 @@
-# magerelicdapp
+# nftrelic-frontend
