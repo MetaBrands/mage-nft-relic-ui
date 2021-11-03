@@ -1,20 +1,20 @@
 {
-  "name": "epic-nfts-ui",
-  "description": "A dapp built for the Buildspace NFT Minting course Alkes Cohort.",
-  "version": "0.1.0",
+  "name": "mb-nft-reflic-frontend",
+  "description": "A dapp built for crafting MetaBrands NFT Relics.",
+  "version": "0.2.0",
   "private": false,
   "author": "Andreas Bigger <bigger@usc.edu>",
   "dependencies": {
     "@material-ui/core": "^4.12.3",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "ethers": "^5.4.4",
+    "@testing-library/react": "^12.1.2",
+    "ethers": "^5.5.1",
     "jquery": "^3.6.0",
     "material-react-toastify": "^1.0.1",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-scripts": "^0.9.5"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "react-scripts": "^4.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
