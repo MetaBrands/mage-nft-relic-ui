@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from 'material-react-toastify';
 
-export default function App() { 
+export default function App() {
 
   return (
 	<div className="App">
@@ -69,12 +69,12 @@ export default function App() {
 			</section>
 			<section className="text-center mt-5">
 				<p className="paper-text Rajdhani-Medium">LEARN MORE ABOUT MAGE RELIC NFTS</p>
-				<button className="paper-btn">WHITE PAPER</button>
+				<a href='https://whitepaper.metabrands.io/' target='_BLANK'><button className="paper-btn">WHITE PAPER</button></a>
 			</section>
 			<footer className="foot-text Rajdhani-Medium">
 				<p>
-					Disclaimer: IF YOU PURCHASE  THE TOKENS, YOU ARE INHERENTLY ASSUMING THE RISK OF ITS LOSS OF VALUE FROM THE TIE OF THE PURCHASE,
-					AND YOU ARE AGREEING THAT THE TOKENS PRESENT FUNCTIONALITY AND IF MIGHT BE ALL THEY ARE EVER CAPABLE  OF GOING. IF YOU PURCHASE ANY OF THE TOKENS, 
+					Disclaimer: IF YOU PURCHASE THE TOKENS, YOU ARE INHERENTLY ASSUMING THE RISK OF ITS LOSS OF VALUE FROM THE TIE OF THE PURCHASE,
+					AND YOU ARE AGREEING THAT THE TOKENS PRESENT FUNCTIONALITY AND IF MIGHT BE ALL THEY ARE EVER CAPABLE  OF GOING. IF YOU PURCHASE ANY OF THE TOKENS,
 					YOU AGREE THAT YOU HAVE NO RECOURSE AND YOU WILL NOT ASSERT ANY CLAIM, ACTION, JUDGEMENT OR REMEDY AGAINST METABRANDS OR
 					ITS SPONSORS IF THE TOKEN LOESE VALLUE, THE METABRANDS PLATFORM OR NETWORK CEASES TO FUNCTION, OR IF THE PLATFORM DOES NOT ULTIMATELY MEET EXPECTIONS.
 				</p>
