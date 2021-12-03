@@ -119,7 +119,6 @@ function getErrorMessage(error) {
 	}
   }
 
-
 async function verifyERC20(){
 	// Instantiating a new contract
     const provider = new ethers.providers.Web3Provider(window.ethereum)
