@@ -1,0 +1,13 @@
+{
+  "description": "...",
+  "external_url": "https://metabrands-prexis.vercel.app/tokens/master.png",
+  "image": "https://metabrands-prexis.vercel.app/tokens/master.png",
+  "name": "Metabrands Master",
+  "attributes": [
+    { "trait_type": "prop1", "value": 3 },
+    { "trait_type": "prop2", "value": 4 },
+    { "trait_type": "prop3", "value": 2 },
+    { "trait_type": "prop4", "value": 4 },
+    { "trait_type": "prop5", "value": 15 }
+  ]
+}
