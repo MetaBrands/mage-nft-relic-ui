@@ -62,7 +62,7 @@
 }
 
 .meta-fox {
-    background-color: #2fc4c8;
+    /* background-color: #2fc4c8; */
     border: none;
     border-radius: 50%;
     position: relative;
@@ -75,7 +75,7 @@
 }
 
 .wallet-address {
-    background-color: #2fc4c8;
+    /* background-color: #2fc4c8; */
     border: none;
     border-radius: 20px;
     height: 40px;
@@ -87,7 +87,7 @@
 }
 
 .fox-wallet {
-    width: 24%;
+    width: 20%;
 }
 
 .relic-text {
@@ -116,7 +116,7 @@
 .art-section {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     position: relative;
 }
 
@@ -150,7 +150,7 @@
 }
 
 .paper-btn {
-    background-color: #2fc4c8;
+    /* background-color: #2fc4c8; */
     color: white;
     border: none;
     padding: 10px 20px;
@@ -173,6 +173,7 @@
     width: 40%;
     border-bottom-left-radius: 15px;
     border-top-right-radius: 15px;
+    transition: .5s;
 }
 
 .craft-group {
@@ -260,3 +261,76 @@
         margin-top: 7%;
     }
 }
+
+/* Custom CSS */
+
+.disabled {
+    opacity: 0.3;
+}
+
+.cursorpointer{
+    cursor:pointer;
+}
+
+.stone-craft:hover {
+    opacity: 0.5;
+}
+
+.stone-craftown {
+    background: transparent;
+    color: white;
+    border: 1px solid #40d1cc;
+    /* padding: 6px 6px; */
+    font-size: 14px;
+    max-width: 100%;
+    border-bottom-left-radius: 15px;
+    border-top-right-radius: 15px;
+    transition: .5s;
+}
+
+.meta-foxown {
+    /* background-color: #2fc4c8; */
+    display: flex;
+    margin-right: 10px;
+    flex-direction: column;
+    margin-left: 20px;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    position: relative;
+    border-radius: 20px;
+    max-width: 100%;
+    height: 40px;
+}
+
+.flexown {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* LOADING */
+  
+/* .c-loaderOn {
+    animation: is-rotating 1s infinite;
+    border: 6px solid #e5e5e5;
+    border-radius: 50%;
+    border-top-color: #51d4db;
+    height: 300px;
+    width: 300px;
+    position: fixed;
+    top: 40%;
+    left: 42%;
+    z-index: 9999;
+  }
+
+.c-loaderOf{
+    display: none;
+}
+  
+  @keyframes is-rotating {
+    to {
+      transform: rotate(1turn);
+    }
+  } */
