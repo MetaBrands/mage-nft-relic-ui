@@ -1,0 +1,20 @@
+[
+  "event NFTAdded(string name, address contractAddr, uint256 magePrice)",
+  "event NFTRemoved(string name)",
+  "event OwnershipTransferred(address indexed previousOwner, address indexed newOwner)",
+  "event Paused(address account)",
+  "event Unpaused(address account)",
+  "function addNFTokenAddr(string _name, address _contractAddr, uint256 _magePrice)",
+  "function mageERC20Addr() view returns (address)",
+  "function mintNFT(string _name)",
+  "function nftTokens(string) view returns (bool exists, address contractAddr, uint256 magePrice)",
+  "function owner() view returns (address)",
+  "function pause()",
+  "function paused() view returns (bool)",
+  "function removeNFTokenAddr(string _name)",
+  "function renounceOwnership()",
+  "function setMageERC20Addr(address _mageERC20Addr)",
+  "function transferOwnership(address newOwner)",
+  "function unpause()",
+  "function upgradeNFT(string _fromName, string _toName)"
+]
