@@ -14,6 +14,7 @@ const injected = new InjectedConnector({
     supportedChainIds: [Number(process.env.REACT_APP_CHAINID)],
 });
 
+
 import {Web3ReactProvider,useWeb3React,UnsupportedChainIdError} from "@web3-react/core";
 import {NoEthereumProviderError,UserRejectedRequestError as UserRejectedRequestErrorInjected} from "@web3-react/injected-connector";
 import {ethers} from 'ethers'
@@ -27,6 +28,17 @@ export default function App() {
 
 	
 const { active, account, library, connector, chainId, error, activate, deactivate } = useWeb3React();
+
+// *************************** USE EFFECTS ***************************
+
+// used to connect account automatically
+useEffect(() => {
+    injected.isAuthorized().then((isAuthorized) => {
+      if (isAuthorized) {
+        activate(injected);
+}
+    });
+  }, [activate]);
 	
 useEffect(() => {
 	if(active){
@@ -36,9 +48,12 @@ useEffect(() => {
 		let err = getErrorMessage(error)
 		notifyError(err)
 		resetGeneralDeactive()
-
 	}
+	// if(chainId !== Number(process.env.REACT_APP_CHAIN_ID)){
+		// 	// }
 }, [chainId, account, active, error])
+
+// *************************** USE STATES ***************************
 
 // Craft buttons
 const [craftMasterButton, setCraftMasterButton]= useState(true)
@@ -79,21 +94,65 @@ const [masterNFT, setMasterNFT] = useState('')
 const [oracleNFT, setOracleNFT] = useState('')
 const [archmageNFT, setArchmageNFT] = useState('')
 
+// Add Token Buttons
+const [addTokenButton, setAddTokenButton] = useState(false)
+
 
 // *************************** ALERT FUNCTIONS ********************************
-const notifySuccess = (mesage) => toast.success(mesage, {position: toast.POSITION.TOP_CENTER});
-const notifyError = (mesage) => toast.error(mesage, {position: toast.POSITION.TOP_CENTER});
-const notifyInfo = (mesage) => toast.info(mesage, 
-	{position: toast.POSITION.TOP_CENTER, 
-	autoClose: false,
-	closeOnClick: true,	
-});
+const notifySuccess = (mesage) => toast.success(mesage, {position: toast.POSITION.TOP_CENTER, bodyClassName: "text-center"});
+const notifyError = (mesage) => toast.error(mesage, {position: toast.POSITION.TOP_CENTER, bodyClassName: "text-center"});
+const notifyTransactionInfo = (mesage, clickfunction) =>
+toast.info(mesage,{position: toast.POSITION.TOP_CENTER,autoClose: false,closeOnClick: false,onClick: clickfunction,bodyClassName: "underlinedtext"});
+const notifyInfo = (mesage) => 
+toast.warn(mesage,{position: toast.POSITION.TOP_CENTER,autoClose: 3000,closeOnClick: true, icon: '🚀'});
+
+
+
+// ******************************** ADD TOKEN FUNCTION ************************************
+
+async function AddTokenToWallet(){
+try {	
+  // wasAdded is a boolean. Like any RPC method, an error may be thrown.
+  const wasAdded = await ethereum.request({
+    method: 'wallet_watchAsset',
+    params: {
+      type: 'ERC20', // Initially only supports ERC20, but eventually more!
+      options: {
+        address: process.env.REACT_APP_MAGE_ADDR, // The address that the token is at.
+        symbol: process.env.REACT_APP_TOKEN_SYMBOL, // A ticker symbol or shorthand, up to 5 chars.
+        decimals: Number(process.env.REACT_APP_TOKEN_DECIMALS), // The number of decimals in the token
+        image: process.env.REACT_APP_TOKEN_IMAGE // A string url of the token logo
+      },
+    },
+  });
+  if (wasAdded) {
+    notifyInfo("Token will be successfully added to your wallet");
+  } else {
+    console.log('Canceled by user!');
+  }
+} catch (error) {
+  console.log(error);
+}
+}
+
+// *************************** CHANGE NETWORK FUNCTION *************************************
+
+async function connectWallet(){
+	activate(injected)
+	if(window.ethereum){
+		await window.ethereum.request(
+		{method: "wallet_switchEthereumChain",
+		params:[{chainId: `0x${Number(process.env.REACT_APP_CHAINID).toString(16)}`}]})
+		activate(injected)		
+	}	
+}
 
 // *************************** VERIFY FUNCTIONS ********************************
 
 function verifyNetwork(){	
 		if(!error){
 			verifyERC20()
+			setAddTokenButton(true)
 		}else{
 			resetGeneral()
 		if(active){
@@ -242,8 +301,14 @@ async function craftMasterToken(){
 	try {
 		let res = await contracterc721Master.mintNFT("MASTER")
 		setCraftMasterButtonInnerText(false)
+
+		const transactionLink = `${process.env.REACT_APP_EXPLORER}/${res.hash}`
+		function redirectToTransaction(){
+			window.open(transactionLink, '_blank')
+		}
+
 		
-		notifyInfo('Please wait for the transaction to complete....')
+		notifyTransactionInfo(`Please wait for the transaction to complete.... Click here to see the transaction details`, redirectToTransaction)
 		let resWait = await res.wait()
 		setCraftMasterButtonInnerText(true)
 		toast.dismiss()
@@ -276,8 +341,13 @@ async function cratOracleToken(){
 	try{
 		let res = await contracterc721Oracle.mintNFT("ORACLE")
 		setCraftOracleButtonInnerText(false)
+
+		const transactionLink = `https://rinkeby.etherscan.io/tx/${res.hash}`
+		function redirectToTransaction(){
+			window.open(transactionLink, '_blank')
+		}
 		
-		notifyInfo('Please wait for the transaction to complete....')
+		notifyTransactionInfo('Please wait for the transaction to complete.... Click here to see the transaction details', redirectToTransaction)
 		let resWait = await res.wait()
 		setCraftOracleButtonInnerText(true)
 		toast.dismiss()
@@ -309,8 +379,13 @@ async function cratArchmageToken(){
 	try{
 		let res = await contracterc721Archmage.mintNFT("ARCHMAGE")
 		setCraftArchmageButtonInnerText(false)
+
+		const transactionLink = `https://rinkeby.etherscan.io/tx/${res.hash}`
+		function redirectToTransaction(){
+			window.open(transactionLink, '_blank')
+		}
 		
-		notifyInfo('Please wait for the transaction to complete....')
+		notifyTransactionInfo('Please wait for the transaction to complete.... Click here to see the transaction details', redirectToTransaction)
 		let resWait = await res.wait()
 		setCraftArchmageButtonInnerText(true)
 		toast.dismiss()
@@ -346,8 +421,13 @@ async function upgradeMasterToOracleToken(){
 			const contracterc721Master = new ethers.Contract(process.env.REACT_APP_MAGECREATOR_ADDR, MageCreator, signerx)
 			let res = await contracterc721Master.upgradeNFT("MASTER", "ORACLE")
 			setUpgradeMasterToOracleButtonInnerText(false)
+
+			const transactionLink = `https://rinkeby.etherscan.io/tx/${res.hash}`
+		function redirectToTransaction(){
+			window.open(transactionLink, '_blank')
+		}
 			
-			notifyInfo('Please wait for the transaction to complete....')
+			notifyTransactionInfo('Please wait for the transaction to complete.... Click here to see the transaction details', redirectToTransaction)
 			let resWait = await res.wait()
 			setUpgradeMasterToOracleButtonInnerText(true)
 			toast.dismiss()
@@ -385,7 +465,13 @@ async function upgradeOracleToArchmageToken(){
 			const contracterc721Master = new ethers.Contract(process.env.REACT_APP_MAGECREATOR_ADDR, MageCreator, signerx)
 			let res = await contracterc721Master.upgradeNFT("ORACLE","ARCHMAGE")
 			setUpgradeOracleToArchmageButtonInnerText(false)
-			notifyInfo('Please wait for the transaction to complete....')
+
+			const transactionLink = `https://rinkeby.etherscan.io/tx/${res.hash}`
+		function redirectToTransaction(){
+			window.open(transactionLink, '_blank')
+		}
+
+			notifyTransactionInfo('Please wait for the transaction to complete.... Click here to see the transaction details', redirectToTransaction)
 			
 			let resWait = await res.wait()
 			setUpgradeOracleToArchmageButtonInnerText(true)
@@ -422,7 +508,13 @@ async function UpgradeMasterToArchmageToken(){
 			const contracterc721Master = new ethers.Contract(process.env.REACT_APP_MAGECREATOR_ADDR, MageCreator, signerx)
 			let res = await contracterc721Master.upgradeNFT("MASTER", "ARCHMAGE")
 			setUpgradeMasterToArchmageButtonInnerText(false)
-			notifyInfo('Please wait for the transaction to complete....')
+
+			const transactionLink = `https://rinkeby.etherscan.io/tx/${res.hash}`
+		function redirectToTransaction(){
+			window.open(transactionLink, '_blank')
+		}
+
+			notifyTransactionInfo('Please wait for the transaction to complete.... Click here to see the transaction details', redirectToTransaction)
 			
 			let resWait = await res.wait()
 			setUpgradeMasterToArchmageButtonInnerText(true)
@@ -498,6 +590,9 @@ function resetGeneralDeactive(){
 	setUpgradeFromMasterToArchmageHover(false)
 	setUpgradeFromOracleToArchmageHover(false)
 
+	// Add token button
+	setAddTokenButton(false)
+
 	// Deactivate current wallet
 	deactivate()
 }
@@ -509,7 +604,17 @@ function resetGeneralDeactive(){
 				<div className="meta-logo logo-block">
 					<img src="./assets/images/Meta_logo.png" className="logo"/>
 				</div>
-				<div className="d-flex justify-content-between align-items-center fox-wallet cursorpointer stone-craftown" onClick={() => { active ? resetGeneralDeactive() : activate(injected) }}>
+				{ addTokenButton ? 
+					 <div className="d-flex justify-content-center align-items-center text-center fox-wallet cursorpointer stone-craftown" onClick={() => AddTokenToWallet()}>
+						<div className="meta-fox d-flex justify-content-center align-items-center">
+							<img width="30px" src={process.env.REACT_APP_TOKEN_IMAGE}/>
+						</div>
+						<div className="font-white wallet-address">
+							Add token to your wallet
+						</div>
+				 	</div>
+				: false }
+				<div className="d-flex justify-content-between align-items-center fox-wallet cursorpointer stone-craftown" onClick={() => {active ? resetGeneralDeactive() : connectWallet()}}>
 					{active ? 
 					<div id="LoadingPage" className="meta-foxown d-flex justify-content-center align-items-center">
 						{active ? `MAGE: ${MageBalanceERC20}`: false}
@@ -521,7 +626,7 @@ function resetGeneralDeactive(){
 						<img src="./assets/images/Meta_fox.png"/>
 					</div>
 					<div className="font-white wallet-address">
-						{ error ? getErrorMessage(error) : active ? `${account.substring(0, 6)}...${account.substring(account.length - 4)}` : 'Connect Wallet'}
+						{ error ? getErrorMessage(error) : active ? `${account.substring(0, 6)}...${account.substring(account.length - 4)}` : 'Connect Wallet'}	
 					</div>
 				</div>
 			</header>

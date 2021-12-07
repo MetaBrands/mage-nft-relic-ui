@@ -310,27 +310,7 @@
     align-items: center;
 }
 
-/* LOADING */
-  
-/* .c-loaderOn {
-    animation: is-rotating 1s infinite;
-    border: 6px solid #e5e5e5;
-    border-radius: 50%;
-    border-top-color: #51d4db;
-    height: 300px;
-    width: 300px;
-    position: fixed;
-    top: 40%;
-    left: 42%;
-    z-index: 9999;
-  }
-
-.c-loaderOf{
-    display: none;
+.underlinedtext{
+    text-decoration: underline;
+    text-decoration: bold;
 }
-  
-  @keyframes is-rotating {
-    to {
-      transform: rotate(1turn);
-    }
-  } */
