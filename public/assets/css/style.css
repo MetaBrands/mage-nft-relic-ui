@@ -58,7 +58,7 @@
 }
 
 .logo {
-    width: 100%;
+    width: 80%;
 }
 
 .meta-fox {
@@ -68,6 +68,11 @@
     position: relative;
     width: 40px;
     height: 40px;
+}
+
+.meta-fox-icon {
+    width: 34;
+    height: 34px;
 }
 
 .font-white {
@@ -91,7 +96,7 @@
 }
 
 .relic-text {
-
+    font-size: 2.0rem;
 }
 
 .text-sention {
@@ -136,21 +141,22 @@
 }
 
 .stone-1 {
-    width: 80%;
+    width: 50%;
+    height: 220px;
 }
 
 .stone-2 {
-    width: 80%;
-    margin-top: 8%;
-    margin-bottom: 3%;
+    width: 50%;
+    height: 220px;
 }
 
 .stone-3 {
-    width: 77.5%;
+    width: 50%;
+    height: 220px;
 }
 
 .paper-btn {
-    /* background-color: #2fc4c8; */
+    background-color: #2fc4c8;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -194,10 +200,16 @@
     font-weight: bold;
 }
 
+.mage-icon {
+    width: 30px;
+    height: 30px;
+}
+
 .mage-text {
     color: #888789;
     font-size: 16px;
     margin-left: 3%;
+    padding-top: 3px;
 }
 
 .mage-block {
@@ -206,11 +218,11 @@
 }
 
 @media(max-width: 1550px) {
-    
+
 }
 
 @media(max-width: 1400px) {
- 
+
 }
 
 @media(max-width: 1200px) {
@@ -221,8 +233,8 @@
 
 }
 
-@media (max-width: 950px) {    
- 
+@media (max-width: 950px) {
+
 }
 
 @media (max-width: 780px) {
