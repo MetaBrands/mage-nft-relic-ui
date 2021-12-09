@@ -124,9 +124,9 @@ try {
     },
   });
   if (wasAdded) {
-    notifyInfo("Token will be successfully added to your wallet");
+    notifyInfo("Token will be added to your wallet...");
   } else {
-    console.log('Canceled by user!');
+    console.log('Canceled by user');
   }
 } catch (error) {
   console.log(error);
@@ -305,21 +305,21 @@ async function craftMasterToken(){
 		}
 
 
-		notifyTransactionInfo(`Please wait for the transaction to complete.... Click here to see the transaction details`, redirectToTransaction)
+		notifyTransactionInfo(`Crafting Relic... Please standby... Click here to see the transaction details`, redirectToTransaction)
 		let resWait = await res.wait()
 		setCraftMasterButtonInnerText(true)
 		toast.dismiss()
 
 		if(resWait.status === 1){
-			notifySuccess('Your MASTER token was crafted successfully.')
+			notifySuccess('Congratulations! You\'ve successfully crafted a MASTER Relic NFT')
 			verifyERC20()
 		}else{
-			notifyError('Your token was not crafted')
+			notifyError('Your MASTER Relic NFT was not crafted')
 			verifyERC20()
 		}
 	}catch (e) {
 		if(e.code === 4001){
-			notifyError('User rejected MASTER TOKEN transaction')
+			notifyError('Rejected MASTER Relic NFT Crafting')
 			verifyERC20()
 		}
 	}
@@ -344,21 +344,21 @@ async function cratOracleToken(){
 			window.open(transactionLink, '_blank')
 		}
 
-		notifyTransactionInfo('Please wait for the transaction to complete.... Click here to see the transaction details', redirectToTransaction)
+		notifyTransactionInfo('Crafting Relic... Please standby... Click here to see the transaction details', redirectToTransaction)
 		let resWait = await res.wait()
 		setCraftOracleButtonInnerText(true)
 		toast.dismiss()
 
 		if(resWait.status === 1){
-			notifySuccess('Your ORACLE token was crafted successfully.')
+			notifySuccess('Congratulations! You\'ve successfully crafted a ORACLE Relic NFT')
 			verifyERC20()
 		}else{
-			notifyError('Your ORACLE token was not crafted')
+			notifyError('Your ORACLE Relic NFT was not crafted')
 			verifyERC20()
 		}
 	}catch(e){
 		if(e.code === 4001){
-			notifyError('User rejected ORACLE TOKEN transaction')
+			notifyError('Rejected ORACLE Relic NFT Crafting')
 			verifyERC20()
 		}
 	}
@@ -382,21 +382,21 @@ async function cratArchmageToken(){
 			window.open(transactionLink, '_blank')
 		}
 
-		notifyTransactionInfo('Please wait for the transaction to complete.... Click here to see the transaction details', redirectToTransaction)
+		notifyTransactionInfo('Crafting Relic... Please standby... Click here to see the transaction details', redirectToTransaction)
 		let resWait = await res.wait()
 		setCraftArchmageButtonInnerText(true)
 		toast.dismiss()
 
 		if(resWait.status === 1){
-			notifySuccess('Your Archmage token was crafted successfully.')
+			notifySuccess('Congratulations! You\'ve successfully crafted a ARCHMAGE Relic NFT')
 			verifyERC20()
 		}else{
-			notifyError('Your Archmage token was not crafted')
+			notifyError('Your ARCHMAGE Relic NFT was not crafted')
 			verifyERC20()
 		}
 	}catch(e){
 		if(e.code === 4001){
-			notifyError('User rejected ARCHMAGE TOKEN transaction')
+			notifyError('Rejected ARCHMAGE Relic NFT Crafting')
 			verifyERC20()
 		}
 	}
@@ -424,13 +424,13 @@ async function upgradeMasterToOracleToken(){
 			window.open(transactionLink, '_blank')
 		}
 
-			notifyTransactionInfo('Please wait for the transaction to complete.... Click here to see the transaction details', redirectToTransaction)
+			notifyTransactionInfo('Upgrading Relic... Please standby... Click here to see the transaction details', redirectToTransaction)
 			let resWait = await res.wait()
 			setUpgradeMasterToOracleButtonInnerText(true)
 			toast.dismiss()
 
 			if(resWait.status === 1){
-				notifySuccess('Your upgrade from MASTER to ORACLE was successfull')
+				notifySuccess('Congratulations! Your upgrade from MASTER to ORACLE was successful')
 				verifyERC20()
 			}else{
 				notifyError('Error on upgrade')
@@ -439,12 +439,12 @@ async function upgradeMasterToOracleToken(){
 
 		}catch (e){
 			if(e.code === 4001){
-			notifyError('User rejected MASTER TO ORACLE UPGRADE transaction')
+			notifyError('Rejected MASTER to ORACLE Upgrade')
 			verifyERC20()
 			}
 		}
 	}else{
-		notifyError('Insufficient tokens')
+		notifyError('Insufficient Relic')
 		verifyERC20()
 	}
 
@@ -468,14 +468,14 @@ async function upgradeOracleToArchmageToken(){
 			window.open(transactionLink, '_blank')
 		}
 
-			notifyTransactionInfo('Please wait for the transaction to complete.... Click here to see the transaction details', redirectToTransaction)
+			notifyTransactionInfo('Upgrading Relic... Please standby... Click here to see the transaction details', redirectToTransaction)
 
 			let resWait = await res.wait()
 			setUpgradeOracleToArchmageButtonInnerText(true)
 			toast.dismiss()
 
 			if(resWait.status === 1){
-				notifySuccess('Your upgrade from ORACLE to ARCHMAGE was successfull')
+				notifySuccess('Congratulations! Your upgrade from ORACLE to ARCHMAGE was successful')
 				verifyERC20()
 			}else{
 				notifyError('Error on upgrade')
@@ -483,12 +483,12 @@ async function upgradeOracleToArchmageToken(){
 			}
 		}catch(e){
 			if(e.code === 4001){
-			notifyError('User rejected MASTER TO ARCHMAGE UPGRADE transaction')
+			notifyError('Rejected ORACLE to ARCHMAGE Upgrade')
 			verifyERC20()
 			}
 		}
 	}else{
-		notifyError('Insufficient tokens')
+		notifyError('Insufficient Relic')
 		verifyERC20()
 	}
 }
@@ -511,14 +511,14 @@ async function UpgradeMasterToArchmageToken(){
 			window.open(transactionLink, '_blank')
 		}
 
-			notifyTransactionInfo('Please wait for the transaction to complete.... Click here to see the transaction details', redirectToTransaction)
+			notifyTransactionInfo('Upgrading Relic... Please standby... Click here to see the transaction details', redirectToTransaction)
 
 			let resWait = await res.wait()
 			setUpgradeMasterToArchmageButtonInnerText(true)
 			toast.dismiss()
 
 			if(resWait.status === 1){
-				notifySuccess('Your upgrade from MASTER to ARCHMAGE was successfull')
+				notifySuccess('Congratulations! Your upgrade from MASTER to ARCHMAGE was successful')
 				verifyERC20()
 			}else{
 				notifyError('Error on upgrade')
@@ -526,12 +526,12 @@ async function UpgradeMasterToArchmageToken(){
 			}
 		}catch(e){
 			if(e.code === 4001){
-				notifyError('User rejected ORACLE TO ARCHMAGE UPGRADE transaction')
+				notifyError('Rejected MASTER to ARCHMAGE Upgrade')
 				verifyERC20()
 			}
 		}
 	}else{
-		notifyError('Insufficient tokens')
+		notifyError('Insufficient Relic')
 		verifyERC20()
 	}
 }
@@ -643,7 +643,7 @@ function resetGeneralDeactive(){
 							<button className={`stone-craft ${craftMasterHover ? false : 'disabled'}`} disabled={craftMasterButton} onClick={craftMasterToken}>
 								{craftMasterButtonInnerText ? 'CRAFT' : 'CRAFTING...'}
 							</button>
-							<p className="text-white mt-2">	{active && tokenERC20 < 10_000? 'Insufficient tokens ' : false}</p>
+							<p className="text-white mt-2">	{active && tokenERC20 < 10_000? 'Insufficient MAGE ' : false}</p>
 
 							<div className="d-flex justify-content-center mt-4 mage-block">
 								<p className="m-text">M</p>
@@ -653,7 +653,7 @@ function resetGeneralDeactive(){
 								{upgradeMasterToOracleButtonInnerText ? 'UPGRADE TO ORACLE' : 'UPGRADING...'}
 							</button>
 
-							<p className="text-white mt-2">{upgradeFromMasterToOracle == true && active ? 'Insufficient Tokens':false }</p>
+							<p className="text-white mt-2">{upgradeFromMasterToOracle == true && active ? 'Insufficient MAGE':false }</p>
 
 
 							<div className="d-flex justify-content-center mt-4 mage-block">
@@ -664,7 +664,7 @@ function resetGeneralDeactive(){
 								{upgradeMasterToArchmageButtonInnerText ? 'UPGRADE TO ARCHMAGE' : 'UPGRADING...'}
 							</button>
 
-							<p className="text-white mt-2">{upgradeFromMasterToArchmage == true && active ? 'Insufficient Tokens' : false}</p>
+							<p className="text-white mt-2">{upgradeFromMasterToArchmage == true && active ? 'Insufficient MAGE' : false}</p>
 
 							<div className="d-flex justify-content-center mt-4 mage-block">
 								<p className="m-text">M</p>
@@ -681,7 +681,7 @@ function resetGeneralDeactive(){
 							<button className={`stone-craft ${craftOracleHover ? false : 'disabled'}`} disabled={craftOracleButton} onClick={cratOracleToken}>
 								{craftOracleButtonInnerText ? 'CRAFT' : 'CRAFTING...'}
 							</button>
-							{active && tokenERC20 < 25_000 ? <p className="text-white mt-2">Insufficient tokens</p> : false }
+							{active && tokenERC20 < 25_000 ? <p className="text-white mt-2">Insufficient MAGE</p> : false }
 							<div className="d-flex justify-content-center mt-4 mage-block">
 								<p className="m-text">M</p>
 								<p className="mage-text Rajdhani-Medium">25,000 MAGE</p>
@@ -690,7 +690,7 @@ function resetGeneralDeactive(){
 								{upgradeOracleToArchmageButtonInnerText ? 'UPGRADE TO ARCHMAGE' : 'UPGRADING...'}
 							</button>
 
-							<p className="text-white mt-2">	{upgradeFromOracleToArchmage == true && active ? 'Insufficient tokens' : false}</p>
+							<p className="text-white mt-2">	{upgradeFromOracleToArchmage == true && active ? 'Insufficient MAGE' : false}</p>
 
 
 							<div className="d-flex justify-content-center mt-4 mage-block">
@@ -711,7 +711,7 @@ function resetGeneralDeactive(){
 								{craftArchmageButtonInnerText ? 'CRAFT' : 'CRAFTING...'}
 							</button>
 						</div>
-						<p className="text-white mt-2">{active && tokenERC20 < 50_000  ? 'Insufficient Tokens' : false}</p>
+						<p className="text-white mt-2">{active && tokenERC20 < 50_000  ? 'Insufficient MAGE' : false}</p>
 
 						<div className="d-flex justify-content-center mt-4 mage-block">
 							<p className="m-text">M</p>
@@ -726,10 +726,7 @@ function resetGeneralDeactive(){
 			</section>
 			<footer className="foot-text Rajdhani-Medium">
 				<p>
-					Disclaimer: IF YOU PURCHASE THE TOKENS, YOU ARE INHERENTLY ASSUMING THE RISK OF ITS LOSS OF VALUE FROM THE TIE OF THE PURCHASE,
-					AND YOU ARE AGREEING THAT THE TOKENS PRESENT FUNCTIONALITY AND IF MIGHT BE ALL THEY ARE EVER CAPABLE  OF GOING. IF YOU PURCHASE ANY OF THE TOKENS,
-					YOU AGREE THAT YOU HAVE NO RECOURSE AND YOU WILL NOT ASSERT ANY CLAIM, ACTION, JUDGEMENT OR REMEDY AGAINST METABRANDS OR
-					ITS SPONSORS IF THE TOKEN LOESE VALLUE, THE METABRANDS PLATFORM OR NETWORK CEASES TO FUNCTION, OR IF THE PLATFORM DOES NOT ULTIMATELY MEET EXPECTIONS.
+					Disclaimer: BY USING THIS SITE AND INTERACTING WITH THE METABRANDS PLATFORM OR ECOSYSTEM, YOU UNDERSTAND AND ARE INHERENTLY ASSUMING THE RISKS INVOLVED SUCH AS TECHNICAL ISSUES THAT COULD NOT FUNCTION AS NORMALLY EXPECTED OR A COMPLETE LOSS OF VALUE FROM THE TIME OF CRAFTING/MINTING YOUR RELIC BY SACRIFICING MAGE TOKENS, AND YOU ARE AGREEING THAT THE TOKENS/NFTS PRESENT FUNCTIONALITY MIGHT BE ALL THEY ARE EVER CAPABLE OF DOING. IF YOU PURCHASE ANY OF THE TOKENS/NFTS, YOU AGREE THAT YOU ARE IN GOOD FINANCIAL STANDING AND YOU WILL NOT ASSERT ANY CLAIM, ACTION, JUDGEMENT OR REMEDY AGAINST METABRANDS OR ITS SPONSORS IF THE TOKEN/NFTS LOSE VALUE, THE METABRANDS PLATFORM OR NETWORK CEASES TO FUNCTION, OR IF THE PLATFORM DOES NOT ULTIMATELY MEET EXPECTATIONS.
 				</p>
 			</footer>
 		</main>
