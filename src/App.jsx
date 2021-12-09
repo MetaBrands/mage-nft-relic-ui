@@ -599,7 +599,9 @@ function resetGeneralDeactive(){
 		<main className="meta-body">
 			<header className="meta-header">
 				<div className="meta-logo logo-block">
-					<img src="./assets/images/Meta_logo.png" className="logo"/>
+					<a href='https://metabrands.io/'>
+						<img src="./assets/images/Meta_logo.png" className="logo"/>
+					</a>
 				</div>
 				{ addTokenButton ?
 					 <div className="d-flex justify-content-center align-items-center text-center fox-wallet cursorpointer stone-craftown" onClick={() => AddTokenToWallet()}>
@@ -620,7 +622,7 @@ function resetGeneralDeactive(){
 					false
 					}
 					<div className="meta-fox d-flex justify-content-center align-items-center">
-						<img src="./assets/images/Meta_fox.png"/>
+						<img src="./assets/images/Meta_fox.png" className="meta-fox-icon"/>
 					</div>
 					<div className="font-white wallet-address">
 						{ error ? getErrorMessage(error) : active ? `${account.substring(0, 6)}...${account.substring(account.length - 4)}` : 'Connect Wallet'}
@@ -645,29 +647,29 @@ function resetGeneralDeactive(){
 							</button>
 							<p className="text-white mt-2">	{active && tokenERC20 < 10_000? 'Insufficient MAGE ' : false}</p>
 
-							<div className="d-flex justify-content-center mt-4 mage-block">
-								<p className="m-text">M</p>
+							<div className="d-flex justify-content-center mt-3 mage-block">
+								<img src={process.env.REACT_APP_TOKEN_IMAGE} className="mage-icon" />
 								<p className="mage-text Rajdhani-Medium">10,000 MAGE</p>
 							</div>
 							<button className={`stone-craft ${upgradeFromMasterToOracleHover ? false : 'disabled'}`} disabled={upgradeFromMasterToOracle} onClick={upgradeMasterToOracleToken}>
 								{upgradeMasterToOracleButtonInnerText ? 'UPGRADE TO ORACLE' : 'UPGRADING...'}
 							</button>
 
-							<p className="text-white mt-2">{upgradeFromMasterToOracle == true && active ? 'Insufficient MAGE':false }</p>
+							<p className="text-white mt-2">{upgradeFromMasterToOracle == true && active ? 'Insufficient Relic':false }</p>
 
 
-							<div className="d-flex justify-content-center mt-4 mage-block">
-								<p className="m-text">M</p>
+							<div className="d-flex justify-content-center mt-3 mage-block">
+								<img src={process.env.REACT_APP_TOKEN_IMAGE} className="mage-icon" />
 								<p className="mage-text Rajdhani-Medium">15,000 MAGE</p>
 							</div>
 							<button className={`stone-craft ${upgradeFromMasterToArchmageHover ? false : 'disabled'}`} disabled={upgradeFromMasterToArchmage} onClick={UpgradeMasterToArchmageToken}>
 								{upgradeMasterToArchmageButtonInnerText ? 'UPGRADE TO ARCHMAGE' : 'UPGRADING...'}
 							</button>
 
-							<p className="text-white mt-2">{upgradeFromMasterToArchmage == true && active ? 'Insufficient MAGE' : false}</p>
+							<p className="text-white mt-2">{upgradeFromMasterToArchmage == true && active ? 'Insufficient Relic' : false}</p>
 
-							<div className="d-flex justify-content-center mt-4 mage-block">
-								<p className="m-text">M</p>
+							<div className="d-flex justify-content-center mt-3 mage-block">
+								<img src={process.env.REACT_APP_TOKEN_IMAGE} className="mage-icon" />
 								<p className="mage-text Rajdhani-Medium">40,000 MAGE</p>
 							</div>
 					</div>
@@ -681,20 +683,20 @@ function resetGeneralDeactive(){
 							<button className={`stone-craft ${craftOracleHover ? false : 'disabled'}`} disabled={craftOracleButton} onClick={cratOracleToken}>
 								{craftOracleButtonInnerText ? 'CRAFT' : 'CRAFTING...'}
 							</button>
-							{active && tokenERC20 < 25_000 ? <p className="text-white mt-2">Insufficient MAGE</p> : false }
-							<div className="d-flex justify-content-center mt-4 mage-block">
-								<p className="m-text">M</p>
+							<p className="text-white mt-2">	{active && tokenERC20 < 25_000? 'Insufficient MAGE ' : false}</p>
+							<div className="d-flex justify-content-center mt-3 mage-block">
+								<img src={process.env.REACT_APP_TOKEN_IMAGE} className="mage-icon" />
 								<p className="mage-text Rajdhani-Medium">25,000 MAGE</p>
 							</div>
 							<button className={`stone-craft ${upgradeFromOracleToArchmageHover ? false : 'disabled'}`} disabled={upgradeFromOracleToArchmage} onClick={upgradeOracleToArchmageToken}>
 								{upgradeOracleToArchmageButtonInnerText ? 'UPGRADE TO ARCHMAGE' : 'UPGRADING...'}
 							</button>
 
-							<p className="text-white mt-2">	{upgradeFromOracleToArchmage == true && active ? 'Insufficient MAGE' : false}</p>
+							<p className="text-white mt-2">	{upgradeFromOracleToArchmage == true && active ? 'Insufficient Relic' : false}</p>
 
 
-							<div className="d-flex justify-content-center mt-4 mage-block">
-								<p className="m-text">M</p>
+							<div className="d-flex justify-content-center mt-3 mage-block">
+								<img src={process.env.REACT_APP_TOKEN_IMAGE} className="mage-icon" />
 								<p className="mage-text Rajdhani-Medium">25,000 MAGE</p>
 							</div>
 						</div>
@@ -713,8 +715,8 @@ function resetGeneralDeactive(){
 						</div>
 						<p className="text-white mt-2">{active && tokenERC20 < 50_000  ? 'Insufficient MAGE' : false}</p>
 
-						<div className="d-flex justify-content-center mt-4 mage-block">
-							<p className="m-text">M</p>
+						<div className="d-flex justify-content-center mt-3 mage-block">
+							<img src={process.env.REACT_APP_TOKEN_IMAGE} className="mage-icon" />
 							<p className="mage-text Rajdhani-Medium">50,000 MAGE</p>
 						</div>
 					</div>
