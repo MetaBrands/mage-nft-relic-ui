@@ -344,13 +344,13 @@ async function cratOracleToken(){
 			window.open(transactionLink, '_blank')
 		}
 
-		notifyTransactionInfo('Crafting Relic... Please standby... Click here to see the transaction details', redirectToTransaction)
+		notifyTransactionInfo('Crafting Relic... Please standby. Click here to see the transaction details', redirectToTransaction)
 		let resWait = await res.wait()
 		setCraftOracleButtonInnerText(true)
 		toast.dismiss()
 
 		if(resWait.status === 1){
-			notifySuccess('Congratulations! You\'ve successfully crafted a ORACLE Relic NFT')
+			notifySuccess('Congratulations! You\'ve successfully crafted an ORACLE Relic NFT')
 			verifyERC20()
 		}else{
 			notifyError('Your ORACLE Relic NFT was not crafted')
@@ -382,13 +382,13 @@ async function cratArchmageToken(){
 			window.open(transactionLink, '_blank')
 		}
 
-		notifyTransactionInfo('Crafting Relic... Please standby... Click here to see the transaction details', redirectToTransaction)
+		notifyTransactionInfo('Crafting Relic... Please standby. Click here to see the transaction details', redirectToTransaction)
 		let resWait = await res.wait()
 		setCraftArchmageButtonInnerText(true)
 		toast.dismiss()
 
 		if(resWait.status === 1){
-			notifySuccess('Congratulations! You\'ve successfully crafted a ARCHMAGE Relic NFT')
+			notifySuccess('Congratulations! You\'ve successfully crafted an ARCHMAGE Relic NFT')
 			verifyERC20()
 		}else{
 			notifyError('Your ARCHMAGE Relic NFT was not crafted')
@@ -424,7 +424,7 @@ async function upgradeMasterToOracleToken(){
 			window.open(transactionLink, '_blank')
 		}
 
-			notifyTransactionInfo('Upgrading Relic... Please standby... Click here to see the transaction details', redirectToTransaction)
+			notifyTransactionInfo('Upgrading Relic... Please standby. Click here to see the transaction details', redirectToTransaction)
 			let resWait = await res.wait()
 			setUpgradeMasterToOracleButtonInnerText(true)
 			toast.dismiss()
@@ -468,7 +468,7 @@ async function upgradeOracleToArchmageToken(){
 			window.open(transactionLink, '_blank')
 		}
 
-			notifyTransactionInfo('Upgrading Relic... Please standby... Click here to see the transaction details', redirectToTransaction)
+			notifyTransactionInfo('Upgrading Relic... Please standby. Click here to see the transaction details', redirectToTransaction)
 
 			let resWait = await res.wait()
 			setUpgradeOracleToArchmageButtonInnerText(true)
@@ -511,7 +511,7 @@ async function UpgradeMasterToArchmageToken(){
 			window.open(transactionLink, '_blank')
 		}
 
-			notifyTransactionInfo('Upgrading Relic... Please standby... Click here to see the transaction details', redirectToTransaction)
+			notifyTransactionInfo('Upgrading Relic... Please standby. Click here to see the transaction details', redirectToTransaction)
 
 			let resWait = await res.wait()
 			setUpgradeMasterToArchmageButtonInnerText(true)
