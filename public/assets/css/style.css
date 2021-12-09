@@ -51,14 +51,11 @@
     display: flex;
     justify-content: space-between;
     position: relative;
+    flex-wrap: wrap;
 }
 
 .logo-block {
-    width: 20%;
-}
-
-.logo {
-    width: 80%;
+    margin: 5px;
 }
 
 .meta-fox {
@@ -71,7 +68,7 @@
 }
 
 .meta-fox-icon {
-    width: 34;
+    width: 34px;
     height: 34px;
 }
 
@@ -89,10 +86,6 @@
     padding: 0px 15px;
     margin-left: 4%;
     position: relative;
-}
-
-.fox-wallet {
-    width: 20%;
 }
 
 .relic-text {
@@ -141,17 +134,17 @@
 }
 
 .stone-1 {
-    width: 50%;
+    width: 220px;
     height: 220px;
 }
 
 .stone-2 {
-    width: 50%;
+    width: 220px;
     height: 220px;
 }
 
 .stone-3 {
-    width: 50%;
+    width: 220px;
     height: 220px;
 }
 
@@ -166,6 +159,8 @@
 .foot-text {
     color: #4d4d4d;
     margin-top: 4%;
+    margin-left: 10px;
+    margin-right: 10px;
     font-size: 13px;
 }
 
@@ -229,8 +224,10 @@
 
 }
 
-@media (max-width: 1120px) {
-
+@media (max-width: 1024px) {
+    .meta-header {
+        justify-content: center;
+    }
 }
 
 @media (max-width: 950px) {
@@ -242,12 +239,6 @@
 }
 
 @media(max-width: 756px) {
-    .logo-block {
-        width: 40%;
-    }
-    .fox-wallet {
-        width: 50%;
-    }
     .relic-text {
         font-size: 23px;
         font-weight: bold;
@@ -265,9 +256,6 @@
     .foot-text {
         font-size: 9px;
         line-height: 15px;
-    }
-    .stone {
-        width: 70%;
     }
     .t-2 {
         margin-top: 7%;
@@ -292,9 +280,9 @@
     background: transparent;
     color: white;
     border: 1px solid #40d1cc;
-    /* padding: 6px 6px; */
+    margin: 5px;
     font-size: 14px;
-    max-width: 100%;
+    min-width: 20%;
     border-bottom-left-radius: 15px;
     border-top-right-radius: 15px;
     transition: .5s;

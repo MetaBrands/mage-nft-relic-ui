@@ -606,7 +606,7 @@ function resetGeneralDeactive(){
 				{ addTokenButton ?
 					 <div className="d-flex justify-content-center align-items-center text-center fox-wallet cursorpointer stone-craftown" onClick={() => AddTokenToWallet()}>
 						<div className="meta-fox d-flex justify-content-center align-items-center">
-							<img width="30px" src={process.env.REACT_APP_TOKEN_IMAGE}/>
+							<img width="34px" src={process.env.REACT_APP_TOKEN_IMAGE}/>
 						</div>
 						<div className="font-white wallet-address">
 							Add token to your wallet
@@ -636,7 +636,7 @@ function resetGeneralDeactive(){
 				<p className="text-block Rajdhani-SemiBold">SACRIFICE MAGE TOKENS TO CLAIM YOUR RELIC TO THE METAVERSE...</p>
 			</section>
 			<section className="art-section row m-0">
-				<div className="col-md-3 d-flex justify-content-center">
+				<div className="col-lg-3 d-flex justify-content-center">
 					<div className="stone">
 						<h4 className="font-white Rajdhani-Bold" style={{ marginTop: "10%" }}>MASTER</h4>
 
@@ -674,7 +674,7 @@ function resetGeneralDeactive(){
 							</div>
 					</div>
 				</div>
-				<div className="col-md-3 d-flex justify-content-center">
+				<div className="col-lg-3 d-flex justify-content-center">
 					<div className="stone t-2">
 						<h4 className="font-white" style={{ marginTop: "10%" }}>ORACLE</h4>
 						<p className="text-white"> {oracleNFT ? Number(oracleNFT) : 0}</p>
@@ -703,7 +703,7 @@ function resetGeneralDeactive(){
 
 					</div>
 				</div>
-				<div className="col-md-3 d-flex justify-content-center">
+				<div className="col-lg-3 d-flex justify-content-center">
 					<div className="stone t-2">
 						<h4 className="font-white" style={{ marginTop: "10%" }}>ARCHMAGE</h4>
 						<p className="text-white">{archmageNFT ? Number(archmageNFT) : 0}</p>
