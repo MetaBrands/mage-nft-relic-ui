@@ -14,9 +14,10 @@ const injected = new InjectedConnector({
     supportedChainIds: [Number(process.env.REACT_APP_CHAINID)],
 });
 
-
 import {Web3ReactProvider,useWeb3React,UnsupportedChainIdError} from "@web3-react/core";
 import {NoEthereumProviderError,UserRejectedRequestError as UserRejectedRequestErrorInjected} from "@web3-react/injected-connector";
+import {UserRejectedRequestError as UserRejectedRequestErrorWalletConnect} from "@web3-react/walletconnect-connector";
+import {UserRejectedRequestError as UserRejectedRequestErrorFrame } from "@web3-react/frame-connector";
 import {ethers} from 'ethers'
 
 // ABI
@@ -26,22 +27,21 @@ import NFT from './utils/NFT.json'
 
 export default function App() {
 
-	
 const { active, account, library, connector, chainId, error, activate, deactivate } = useWeb3React();
 
 // *************************** USE EFFECTS ***************************
 
-// used to connect account automatically
+// handle logic to eagerly connect to the injected ethereum provider, if it exists and has granted access already
 useEffect(() => {
-    injected.isAuthorized().then((isAuthorized) => {
-      if (isAuthorized) {
-        activate(injected);
-}
-    });
-  }, [activate]);
-	
+	injected.isAuthorized().then((isAuthorized) => {
+		if (isAuthorized) {
+			setTimeout(() => activate(injected, undefined, true).catch(() => {}), 1);
+		}
+	});
+}, [activate]);
+
 useEffect(() => {
-	if(active){
+	if(active) {
 		verifyNetwork()
 	}
 	if(error){
@@ -49,8 +49,6 @@ useEffect(() => {
 		notifyError(err)
 		resetGeneralDeactive()
 	}
-	// if(chainId !== Number(process.env.REACT_APP_CHAIN_ID)){
-		// 	// }
 }, [chainId, account, active, error])
 
 // *************************** USE STATES ***************************
@@ -103,7 +101,7 @@ const notifySuccess = (mesage) => toast.success(mesage, {position: toast.POSITIO
 const notifyError = (mesage) => toast.error(mesage, {position: toast.POSITION.TOP_CENTER, bodyClassName: "text-center"});
 const notifyTransactionInfo = (mesage, clickfunction) =>
 toast.info(mesage,{position: toast.POSITION.TOP_CENTER,autoClose: false,closeOnClick: false,onClick: clickfunction,bodyClassName: "underlinedtext"});
-const notifyInfo = (mesage) => 
+const notifyInfo = (mesage) =>
 toast.warn(mesage,{position: toast.POSITION.TOP_CENTER,autoClose: 3000,closeOnClick: true, icon: '🚀'});
 
 
@@ -111,7 +109,7 @@ toast.warn(mesage,{position: toast.POSITION.TOP_CENTER,autoClose: 3000,closeOnCl
 // ******************************** ADD TOKEN FUNCTION ************************************
 
 async function AddTokenToWallet(){
-try {	
+try {
   // wasAdded is a boolean. Like any RPC method, an error may be thrown.
   const wasAdded = await ethereum.request({
     method: 'wallet_watchAsset',
@@ -138,18 +136,17 @@ try {
 // *************************** CHANGE NETWORK FUNCTION *************************************
 
 async function connectWallet(){
-	activate(injected)
 	if(window.ethereum){
 		await window.ethereum.request(
 		{method: "wallet_switchEthereumChain",
 		params:[{chainId: `0x${Number(process.env.REACT_APP_CHAINID).toString(16)}`}]})
-		activate(injected)		
-	}	
+		activate(injected)
+	}
 }
 
 // *************************** VERIFY FUNCTIONS ********************************
 
-function verifyNetwork(){	
+function verifyNetwork(){
 		if(!error){
 			verifyERC20()
 			setAddTokenButton(true)
@@ -184,10 +181,10 @@ async function verifyERC20(){
     await window.ethereum.request({ method: 'eth_requestAccounts' })
     const contract = new ethers.Contract(process.env.REACT_APP_MAGE_ADDR, MetaBrands, provider)
 	let res = await contract.balanceOf(account)
-	let MageBalance = ethers.utils.formatEther(res)	
+	let MageBalance = ethers.utils.formatEther(res)
 	setTokenERC20(MageBalance)
 	setMageBalanceERC20(new Intl.NumberFormat().format(MageBalance))
-	
+
 	// Master
 	if(MageBalance >= 10_000){
 		setCraftMasterButton(false)
@@ -222,7 +219,7 @@ async function verifyERC721(){
 		const provider = new ethers.providers.Web3Provider(window.ethereum)
 		await window.ethereum.request({ method: 'eth_requestAccounts' })
 		const signerx = provider.getSigner(0)
-	
+
 		// ERC721-MASTER
 		const contracterc721Master = new ethers.Contract(process.env.REACT_APP_MASTER_ADDR, NFT, signerx)
 		let res721Master = await contracterc721Master.balanceOf(account)
@@ -230,7 +227,7 @@ async function verifyERC721(){
 		// console.table(convertedValue721Master + ' Master')
 		let masterNFT = res721Master.toNumber()
 		setMasterNFT(res721Master.toNumber())
-	
+
 		// // ERC721-ORACLE
 		const contracterc721Oracle = new ethers.Contract(process.env.REACT_APP_ORACLE_ADDR, NFT, signerx)
 		let res721Oracle = await contracterc721Oracle.balanceOf(account)
@@ -238,8 +235,8 @@ async function verifyERC721(){
 		// console.table(convertedValue721Oracle + ' Oracles')
 		let oracleNFT = res721Oracle.toNumber()
 		setOracleNFT(res721Oracle.toNumber())
-	
-		// ERC721-ARCHMAGE 
+
+		// ERC721-ARCHMAGE
 		const contracterc721Archmage = new ethers.Contract(process.env.REACT_APP_ARCHMAGE_ADDR, NFT, signerx)
 		let res721Archmage = await contracterc721Archmage.balanceOf(account)
 		let convertedValue721Archmage = ethers.utils.formatEther(res721Archmage)
@@ -255,7 +252,7 @@ async function verifyERC721(){
 		setMageBalanceERC20(new Intl.NumberFormat().format(MageBalance))
 
 
-	
+
 		// NFT
 
 		// Master To Oracle
@@ -263,7 +260,7 @@ async function verifyERC721(){
 			setUpgradeFromMasterToOracle(false)
 			setUpgradeFromMasterToOracleHover(true)
 		}else{
-			setUpgradeFromMasterToOracle(true)		
+			setUpgradeFromMasterToOracle(true)
 			setUpgradeFromMasterToOracleHover(false)
 		}
 
@@ -307,12 +304,12 @@ async function craftMasterToken(){
 			window.open(transactionLink, '_blank')
 		}
 
-		
+
 		notifyTransactionInfo(`Please wait for the transaction to complete.... Click here to see the transaction details`, redirectToTransaction)
 		let resWait = await res.wait()
 		setCraftMasterButtonInnerText(true)
 		toast.dismiss()
-		
+
 		if(resWait.status === 1){
 			notifySuccess('Your MASTER token was crafted successfully.')
 			verifyERC20()
@@ -346,12 +343,12 @@ async function cratOracleToken(){
 		function redirectToTransaction(){
 			window.open(transactionLink, '_blank')
 		}
-		
+
 		notifyTransactionInfo('Please wait for the transaction to complete.... Click here to see the transaction details', redirectToTransaction)
 		let resWait = await res.wait()
 		setCraftOracleButtonInnerText(true)
 		toast.dismiss()
-		
+
 		if(resWait.status === 1){
 			notifySuccess('Your ORACLE token was crafted successfully.')
 			verifyERC20()
@@ -384,12 +381,12 @@ async function cratArchmageToken(){
 		function redirectToTransaction(){
 			window.open(transactionLink, '_blank')
 		}
-		
+
 		notifyTransactionInfo('Please wait for the transaction to complete.... Click here to see the transaction details', redirectToTransaction)
 		let resWait = await res.wait()
 		setCraftArchmageButtonInnerText(true)
 		toast.dismiss()
-		
+
 		if(resWait.status === 1){
 			notifySuccess('Your Archmage token was crafted successfully.')
 			verifyERC20()
@@ -426,17 +423,17 @@ async function upgradeMasterToOracleToken(){
 		function redirectToTransaction(){
 			window.open(transactionLink, '_blank')
 		}
-			
+
 			notifyTransactionInfo('Please wait for the transaction to complete.... Click here to see the transaction details', redirectToTransaction)
 			let resWait = await res.wait()
 			setUpgradeMasterToOracleButtonInnerText(true)
 			toast.dismiss()
-			
+
 			if(resWait.status === 1){
 				notifySuccess('Your upgrade from MASTER to ORACLE was successfull')
 				verifyERC20()
 			}else{
-				notifyError('Error on upgrade')	
+				notifyError('Error on upgrade')
 				verifyERC20()
 			}
 
@@ -472,18 +469,18 @@ async function upgradeOracleToArchmageToken(){
 		}
 
 			notifyTransactionInfo('Please wait for the transaction to complete.... Click here to see the transaction details', redirectToTransaction)
-			
+
 			let resWait = await res.wait()
 			setUpgradeOracleToArchmageButtonInnerText(true)
 			toast.dismiss()
-			
+
 			if(resWait.status === 1){
 				notifySuccess('Your upgrade from ORACLE to ARCHMAGE was successfull')
 				verifyERC20()
 			}else{
-				notifyError('Error on upgrade')			
+				notifyError('Error on upgrade')
 				verifyERC20()
-			}			
+			}
 		}catch(e){
 			if(e.code === 4001){
 			notifyError('User rejected MASTER TO ARCHMAGE UPGRADE transaction')
@@ -515,16 +512,16 @@ async function UpgradeMasterToArchmageToken(){
 		}
 
 			notifyTransactionInfo('Please wait for the transaction to complete.... Click here to see the transaction details', redirectToTransaction)
-			
+
 			let resWait = await res.wait()
 			setUpgradeMasterToArchmageButtonInnerText(true)
 			toast.dismiss()
-			
+
 			if(resWait.status === 1){
 				notifySuccess('Your upgrade from MASTER to ARCHMAGE was successfull')
 				verifyERC20()
 			}else{
-				notifyError('Error on upgrade')			
+				notifyError('Error on upgrade')
 				verifyERC20()
 			}
 		}catch(e){
@@ -604,7 +601,7 @@ function resetGeneralDeactive(){
 				<div className="meta-logo logo-block">
 					<img src="./assets/images/Meta_logo.png" className="logo"/>
 				</div>
-				{ addTokenButton ? 
+				{ addTokenButton ?
 					 <div className="d-flex justify-content-center align-items-center text-center fox-wallet cursorpointer stone-craftown" onClick={() => AddTokenToWallet()}>
 						<div className="meta-fox d-flex justify-content-center align-items-center">
 							<img width="30px" src={process.env.REACT_APP_TOKEN_IMAGE}/>
@@ -615,7 +612,7 @@ function resetGeneralDeactive(){
 				 	</div>
 				: false }
 				<div className="d-flex justify-content-between align-items-center fox-wallet cursorpointer stone-craftown" onClick={() => {active ? resetGeneralDeactive() : connectWallet()}}>
-					{active ? 
+					{active ?
 					<div id="LoadingPage" className="meta-foxown d-flex justify-content-center align-items-center">
 						{active ? `MAGE: ${MageBalanceERC20}`: false}
 					</div>
@@ -626,7 +623,7 @@ function resetGeneralDeactive(){
 						<img src="./assets/images/Meta_fox.png"/>
 					</div>
 					<div className="font-white wallet-address">
-						{ error ? getErrorMessage(error) : active ? `${account.substring(0, 6)}...${account.substring(account.length - 4)}` : 'Connect Wallet'}	
+						{ error ? getErrorMessage(error) : active ? `${account.substring(0, 6)}...${account.substring(account.length - 4)}` : 'Connect Wallet'}
 					</div>
 				</div>
 			</header>
@@ -640,9 +637,9 @@ function resetGeneralDeactive(){
 				<div className="col-md-3 d-flex justify-content-center">
 					<div className="stone">
 						<h4 className="font-white Rajdhani-Bold" style={{ marginTop: "10%" }}>MASTER</h4>
-						
-						<p className="text-white">{masterNFT ? Number(masterNFT) : 0}</p> 
-						<img src="./assets/images/stone_1.png" className="stone-1" />	
+
+						<p className="text-white">{masterNFT ? Number(masterNFT) : 0}</p>
+						<img src="./assets/images/stone_1.png" className="stone-1" />
 							<button className={`stone-craft ${craftMasterHover ? false : 'disabled'}`} disabled={craftMasterButton} onClick={craftMasterToken}>
 								{craftMasterButtonInnerText ? 'CRAFT' : 'CRAFTING...'}
 							</button>
@@ -657,7 +654,7 @@ function resetGeneralDeactive(){
 							</button>
 
 							<p className="text-white mt-2">{upgradeFromMasterToOracle == true && active ? 'Insufficient Tokens':false }</p>
-							
+
 
 							<div className="d-flex justify-content-center mt-4 mage-block">
 								<p className="m-text">M</p>
@@ -666,7 +663,7 @@ function resetGeneralDeactive(){
 							<button className={`stone-craft ${upgradeFromMasterToArchmageHover ? false : 'disabled'}`} disabled={upgradeFromMasterToArchmage} onClick={UpgradeMasterToArchmageToken}>
 								{upgradeMasterToArchmageButtonInnerText ? 'UPGRADE TO ARCHMAGE' : 'UPGRADING...'}
 							</button>
-						
+
 							<p className="text-white mt-2">{upgradeFromMasterToArchmage == true && active ? 'Insufficient Tokens' : false}</p>
 
 							<div className="d-flex justify-content-center mt-4 mage-block">
@@ -693,15 +690,15 @@ function resetGeneralDeactive(){
 								{upgradeOracleToArchmageButtonInnerText ? 'UPGRADE TO ARCHMAGE' : 'UPGRADING...'}
 							</button>
 
-							<p className="text-white mt-2">	{upgradeFromOracleToArchmage == true && active ? 'Insufficient tokens' : false}</p> 
+							<p className="text-white mt-2">	{upgradeFromOracleToArchmage == true && active ? 'Insufficient tokens' : false}</p>
 
-							
+
 							<div className="d-flex justify-content-center mt-4 mage-block">
 								<p className="m-text">M</p>
 								<p className="mage-text Rajdhani-Medium">25,000 MAGE</p>
 							</div>
 						</div>
-						
+
 					</div>
 				</div>
 				<div className="col-md-3 d-flex justify-content-center">
@@ -712,9 +709,9 @@ function resetGeneralDeactive(){
 						<div className="d-flex justify-content-around craft-group">
 							<button className={`stone-craft ${craftArchmageHover ? false : 'disabled'}`} disabled={craftArchmageButton} onClick={cratArchmageToken}>
 								{craftArchmageButtonInnerText ? 'CRAFT' : 'CRAFTING...'}
-							</button>							
+							</button>
 						</div>
-						<p className="text-white mt-2">{active && tokenERC20 < 50_000  ? 'Insufficient Tokens' : false}</p>			
+						<p className="text-white mt-2">{active && tokenERC20 < 50_000  ? 'Insufficient Tokens' : false}</p>
 
 						<div className="d-flex justify-content-center mt-4 mage-block">
 							<p className="m-text">M</p>
