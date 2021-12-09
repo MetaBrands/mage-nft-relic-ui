@@ -388,7 +388,7 @@ async function cratArchmageToken(){
 		toast.dismiss()
 
 		if(resWait.status === 1){
-			notifySuccess('Congratulations! You\'ve successfully crafted a ARCHMAGE Relic NFT')
+			notifySuccess('Congratulations! You\'ve successfully crafted an ARCHMAGE Relic NFT')
 			verifyERC20()
 		}else{
 			notifyError('Your ARCHMAGE Relic NFT was not crafted')
