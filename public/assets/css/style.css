@@ -41,6 +41,14 @@
     font-family: "Rajdhani-SemiBold";
 }
 
+.text-white {
+    color: #fff;
+}
+
+.text-green {
+    color: #7efdd8;
+}
+
 .meta-body {
     background-color: #1a0f21;
     padding: 1% 1%;
@@ -65,11 +73,12 @@
     position: relative;
     width: 40px;
     height: 40px;
+    margin-left: 10px;
 }
 
 .meta-fox-icon {
-    width: 34px;
-    height: 34px;
+    width: 30px;
+    height: 30px;
 }
 
 .font-white {
@@ -98,7 +107,7 @@
     width: 50%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 5%;
+    margin-top: 2%;
 }
 
 .main-title {
@@ -148,8 +157,17 @@
     height: 220px;
 }
 
+.mb-scroll {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 25px;
+    width: 150px;
+    height: 150px;
+}
+
 .paper-btn {
-    background-color: #2fc4c8;
+    background-color: #3d2551;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -167,7 +185,7 @@
 .stone-craft {
     background: transparent;
     color: white;
-    border: 1px solid #40d1cc;
+    border: 1px solid #3ecfcb;
     padding: 6px 0;
     margin-top: 7%;
     font-size: 14px;
@@ -201,7 +219,7 @@
 }
 
 .mage-text {
-    color: #888789;
+    color: #fff;
     font-size: 16px;
     margin-left: 3%;
     padding-top: 3px;
@@ -265,7 +283,7 @@
 /* Custom CSS */
 
 .disabled {
-    opacity: 0.3;
+    opacity: 0.5;
 }
 
 .cursorpointer{
@@ -273,13 +291,17 @@
 }
 
 .stone-craft:hover {
-    opacity: 0.5;
+    background-color: #3ecfcb;
+}
+
+.btn-upgrade:hover {
+    background-color: #7efdd8;
 }
 
 .stone-craftown {
     background: transparent;
     color: white;
-    border: 1px solid #40d1cc;
+    border: 1px solid #3ecfcb;
     margin: 5px;
     font-size: 14px;
     min-width: 20%;

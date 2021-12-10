@@ -606,7 +606,7 @@ function resetGeneralDeactive(){
 				{ addTokenButton ?
 					 <div className="d-flex justify-content-center align-items-center text-center fox-wallet cursorpointer stone-craftown" onClick={() => AddTokenToWallet()}>
 						<div className="meta-fox d-flex justify-content-center align-items-center">
-							<img width="34px" src={process.env.REACT_APP_TOKEN_IMAGE}/>
+							<img width="30px" src={process.env.REACT_APP_TOKEN_IMAGE}/>
 						</div>
 						<div className="font-white wallet-address">
 							Add token to your wallet
@@ -640,7 +640,8 @@ function resetGeneralDeactive(){
 					<div className="stone">
 						<h4 className="font-white Rajdhani-Bold" style={{ marginTop: "10%" }}>MASTER</h4>
 
-						<p className="text-white">{masterNFT ? Number(masterNFT) : 0}</p>
+
+						<p><span className={`${masterNFT ? 'text-green' : 'text-white'}`}>{masterNFT ? Number(masterNFT) : 0}</span></p>
 						<img src="./assets/images/stone_1.png" className="stone-1" />
 							<button className={`stone-craft ${craftMasterHover ? false : 'disabled'}`} disabled={craftMasterButton} onClick={craftMasterToken}>
 								{craftMasterButtonInnerText ? 'CRAFT' : 'CRAFTING...'}
@@ -651,7 +652,7 @@ function resetGeneralDeactive(){
 								<img src={process.env.REACT_APP_TOKEN_IMAGE} className="mage-icon" />
 								<p className="mage-text Rajdhani-Medium">10,000 MAGE</p>
 							</div>
-							<button className={`stone-craft ${upgradeFromMasterToOracleHover ? false : 'disabled'}`} disabled={upgradeFromMasterToOracle} onClick={upgradeMasterToOracleToken}>
+							<button className={`stone-craft btn-upgrade ${upgradeFromMasterToOracleHover ? false : 'disabled'}`} disabled={upgradeFromMasterToOracle} onClick={upgradeMasterToOracleToken}>
 								{upgradeMasterToOracleButtonInnerText ? 'UPGRADE TO ORACLE' : 'UPGRADING...'}
 							</button>
 
@@ -662,7 +663,7 @@ function resetGeneralDeactive(){
 								<img src={process.env.REACT_APP_TOKEN_IMAGE} className="mage-icon" />
 								<p className="mage-text Rajdhani-Medium">15,000 MAGE</p>
 							</div>
-							<button className={`stone-craft ${upgradeFromMasterToArchmageHover ? false : 'disabled'}`} disabled={upgradeFromMasterToArchmage} onClick={UpgradeMasterToArchmageToken}>
+							<button className={`stone-craft btn-upgrade ${upgradeFromMasterToArchmageHover ? false : 'disabled'}`} disabled={upgradeFromMasterToArchmage} onClick={UpgradeMasterToArchmageToken}>
 								{upgradeMasterToArchmageButtonInnerText ? 'UPGRADE TO ARCHMAGE' : 'UPGRADING...'}
 							</button>
 
@@ -677,7 +678,7 @@ function resetGeneralDeactive(){
 				<div className="col-lg-3 d-flex justify-content-center">
 					<div className="stone t-2">
 						<h4 className="font-white" style={{ marginTop: "10%" }}>ORACLE</h4>
-						<p className="text-white"> {oracleNFT ? Number(oracleNFT) : 0}</p>
+						<p><span className={`${oracleNFT ? 'text-green' : 'text-white'}`}>{oracleNFT ? Number(oracleNFT) : 0}</span></p>
 						<img src="./assets/images/stone_2.png" className="stone-2"/>
 						<div className="d-flex justify-content-around craft-group flexown">
 							<button className={`stone-craft ${craftOracleHover ? false : 'disabled'}`} disabled={craftOracleButton} onClick={cratOracleToken}>
@@ -688,7 +689,7 @@ function resetGeneralDeactive(){
 								<img src={process.env.REACT_APP_TOKEN_IMAGE} className="mage-icon" />
 								<p className="mage-text Rajdhani-Medium">25,000 MAGE</p>
 							</div>
-							<button className={`stone-craft ${upgradeFromOracleToArchmageHover ? false : 'disabled'}`} disabled={upgradeFromOracleToArchmage} onClick={upgradeOracleToArchmageToken}>
+							<button className={`stone-craft btn-upgrade ${upgradeFromOracleToArchmageHover ? false : 'disabled'}`} disabled={upgradeFromOracleToArchmage} onClick={upgradeOracleToArchmageToken}>
 								{upgradeOracleToArchmageButtonInnerText ? 'UPGRADE TO ARCHMAGE' : 'UPGRADING...'}
 							</button>
 
@@ -706,7 +707,7 @@ function resetGeneralDeactive(){
 				<div className="col-lg-3 d-flex justify-content-center">
 					<div className="stone t-2">
 						<h4 className="font-white" style={{ marginTop: "10%" }}>ARCHMAGE</h4>
-						<p className="text-white">{archmageNFT ? Number(archmageNFT) : 0}</p>
+						<p><span className={`${archmageNFT ? 'text-green' : 'text-white'}`}>{archmageNFT ? Number(archmageNFT) : 0}</span> </p>
 						<img src="./assets/images/stone_3.png" className="stone-3" />
 						<div className="d-flex justify-content-around craft-group">
 							<button className={`stone-craft ${craftArchmageHover ? false : 'disabled'}`} disabled={craftArchmageButton} onClick={cratArchmageToken}>
@@ -724,6 +725,7 @@ function resetGeneralDeactive(){
 			</section>
 			<section className="text-center mt-5">
 				<p className="paper-text Rajdhani-Medium">LEARN MORE ABOUT MAGE RELIC NFTS</p>
+				<img src="./assets/images/mb-scroll.png" className="mb-scroll" />
 				<a href='https://whitepaper.metabrands.io/' target='_BLANK'><button className="paper-btn">WHITE PAPER</button></a>
 			</section>
 			<footer className="foot-text Rajdhani-Medium">
