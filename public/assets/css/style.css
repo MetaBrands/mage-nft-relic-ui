@@ -1,3 +1,7 @@
+:root {
+    --toastify-color-light: #fff !important;
+}
+
 /* font style */
 
 @font-face {
@@ -49,6 +53,26 @@
     color: #7efdd8;
 }
 
+.no-relic {
+    opacity: 0.5;
+}
+
+.noti-success {
+    background-color: #39b54a !important;
+}
+
+.noti-error {
+    background-color: #ed1c24 !important;
+}
+
+.noti-info {
+    background-color: #00a3bf !important;
+}
+
+.noti-warn {
+    background-color: #00a3bf !important;
+}
+
 .meta-body {
     background-color: #1a0f21;
     padding: 1% 1%;
@@ -66,6 +90,10 @@
     margin: 5px;
 }
 
+.logo {
+    max-width: 256px;
+}
+
 .meta-fox {
     /* background-color: #2fc4c8; */
     border: none;
@@ -79,10 +107,6 @@
 .meta-fox-icon {
     width: 30px;
     height: 30px;
-}
-
-.font-white {
-    color: white;
 }
 
 .wallet-address {
@@ -186,10 +210,10 @@
     background: transparent;
     color: white;
     border: 1px solid #3ecfcb;
-    padding: 6px 0;
-    margin-top: 7%;
-    font-size: 14px;
-    width: 40%;
+    padding: 10px;
+    margin-bottom: 10%;
+    /*font-size: 14px;*/
+    width: 45%;
     border-bottom-left-radius: 15px;
     border-top-right-radius: 15px;
     transition: .5s;
@@ -295,7 +319,7 @@
 }
 
 .btn-upgrade:hover {
-    background-color: #7efdd8;
+    background-color: #3ecfcb;
 }
 
 .stone-craftown {
@@ -304,7 +328,7 @@
     border: 1px solid #3ecfcb;
     margin: 5px;
     font-size: 14px;
-    min-width: 20%;
+    min-width: 100%;
     border-bottom-left-radius: 15px;
     border-top-right-radius: 15px;
     transition: .5s;
