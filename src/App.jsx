@@ -187,7 +187,7 @@ export default function App() {
         },
       });
       if (wasAdded) {
-        notifyInfo("Token will be added to your wallet...");
+        notifySuccess("Token will be added to your wallet...");
       } else {
         console.log("Canceled by user");
       }
@@ -739,6 +739,10 @@ export default function App() {
     deactivate();
   }
 
+  function getFlooredFixed(v, d) {
+    return (Math.floor(v * Math.pow(10, d)) / Math.pow(10, d)).toFixed(d);
+}
+
   return (
 	<div className="App">
 		<main className="meta-body">
@@ -752,7 +756,7 @@ export default function App() {
 				<div>
 					<div className="d-flex justify-content-between align-items-center fox-wallet cursorpointer stone-craftown" onClick={() => {active ? resetGeneralDeactive() : connectWallet()}}>
 						<div className="meta-fox d-flex justify-content-center align-items-center">
-							<img src="./assets/images/meta_fox.png" className="meta-fox-icon"/>
+							<img src="./assets/images/meta_fox.svg" className="meta-fox-icon"/>
 						</div>
 						<div className="text-white wallet-address">
 							{ error ? getErrorMessage(error) : active ? `${account.substring(0, 6)}...${account.substring(account.length - 6)}` : 'Connect Wallet'}
@@ -765,7 +769,7 @@ export default function App() {
 								<img width="30px" src="./assets/images/mage.png" />
 							</div>
 							<div className="d-inline-block text-white wallet-address px-0">
-								{MageBalanceERC20.toString().substring(0, MageBalanceERC20.toString().indexOf(',') != -1 ? MageBalanceERC20.toString().indexOf(',') : MageBalanceERC20.toString().length)}
+								{getFlooredFixed(tokenERC20, 0)}
 							</div>
 						</div>
 					: false }
