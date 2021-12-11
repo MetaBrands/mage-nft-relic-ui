@@ -169,7 +169,7 @@ export default function App() {
       position: toast.POSITION.TOP_CENTER,
       className: "noti-warn",
 	  bodyClassName: "text-center text-white",
-	  icon: () => <img src="./assets/images/icon_magnifying_glass.svg" width={'24px'}/>
+	  icon: () => <img src="./assets/images/icon_warning.svg" width={'24px'}/>
     });
 
   // ******************************** ADD TOKEN FUNCTION ************************************
@@ -213,6 +213,17 @@ export default function App() {
       });
       activate(injected);
     }
+  }
+
+  async function checkWalletConnection(notification = true) {
+    if(!active) {
+      if(notification)
+        notifyInfo("Please connect your wallet");
+
+      return false;
+    }
+
+    return true;
   }
 
   // *************************** VERIFY FUNCTIONS ********************************
@@ -368,6 +379,9 @@ export default function App() {
 
   // Craft Master
   async function craftMasterToken() {
+    const isWalletConnected = await checkWalletConnection();
+    if(!isWalletConnected) return;
+
     // Instantiating a new contract
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     await window.ethereum.request({ method: "eth_requestAccounts" });
@@ -420,6 +434,9 @@ export default function App() {
 
   // Craft Oracle
   async function cratOracleToken() {
+    const isWalletConnected = await checkWalletConnection();
+    if(!isWalletConnected) return;
+
     // Instantiating a new contract
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     await window.ethereum.request({ method: "eth_requestAccounts" });
@@ -472,6 +489,9 @@ export default function App() {
 
   // Craft Archmage
   async function cratArchmageToken() {
+    const isWalletConnected = await checkWalletConnection();
+    if(!isWalletConnected) return;
+
     // Instantiating a new contract
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     await window.ethereum.request({ method: "eth_requestAccounts" });
@@ -525,6 +545,9 @@ export default function App() {
   // *************************** UPGRADE TOKENS ***************************
 
   async function upgradeMasterToOracleToken() {
+    const isWalletConnected = await checkWalletConnection();
+    if(!isWalletConnected) return;
+
     // Instantiating a new contract
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     await window.ethereum.request({ method: "eth_requestAccounts" });
@@ -578,6 +601,9 @@ export default function App() {
   }
 
   async function upgradeOracleToArchmageToken() {
+    const isWalletConnected = await checkWalletConnection();
+    if(!isWalletConnected) return;
+
     // Instantiating a new contract
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     await window.ethereum.request({ method: "eth_requestAccounts" });
@@ -632,6 +658,9 @@ export default function App() {
   }
 
   async function UpgradeMasterToArchmageToken() {
+    const isWalletConnected = await checkWalletConnection();
+    if(!isWalletConnected) return;
+
     // Instantiating a new contract
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     await window.ethereum.request({ method: "eth_requestAccounts" });
