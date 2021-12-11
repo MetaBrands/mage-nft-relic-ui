@@ -136,6 +136,9 @@ export default function App() {
   // Upgrade Collapse
   const [isCollapsed, setIsCollapsed] = useState(false);
 
+  // Checks
+  let isConnecting = false;
+
   // *************************** ALERT FUNCTIONS ********************************
   const notifySuccess = (mesage) =>
     toast.success(mesage, {
@@ -202,6 +205,9 @@ export default function App() {
   // *************************** CHANGE NETWORK FUNCTION *************************************
 
   async function connectWallet() {
+    if(isConnecting) return;
+    isConnecting = true;
+
     if (window.ethereum) {
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
@@ -769,6 +775,8 @@ export default function App() {
 
     // Deactivate current wallet
     deactivate();
+
+    isConnecting = false;
   }
 
   function getFlooredFixed(v, d) {
