@@ -109,6 +109,27 @@
     height: 30px;
 }
 
+.mage-icon {
+    width: 30px;
+    height: 30px;
+}
+
+.upgrade-icon {
+    display: block;
+    width: 28px;
+    height: 28px;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    border: 2px solid #3ecfcb;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+.upgrade-icon:hover {
+    background-color: #3ecfcb;
+}
+
 .wallet-address {
     /* background-color: #2fc4c8; */
     border: none;
@@ -142,6 +163,15 @@
     color: #999999;
     margin-top: 2%;
     font-size: 16px;
+}
+
+.collapse-content-hidden {
+    display: none;
+}
+
+.collapse-content-expanded {
+    display: block;
+    width: 100%;
 }
 
 .art-section {
@@ -235,11 +265,6 @@
     justify-content: center;
     align-items: center;
     font-weight: bold;
-}
-
-.mage-icon {
-    width: 30px;
-    height: 30px;
 }
 
 .mage-text {

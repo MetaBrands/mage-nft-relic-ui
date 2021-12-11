@@ -133,6 +133,9 @@ export default function App() {
   // Add Token Buttons
   const [addTokenButton, setAddTokenButton] = useState(false);
 
+  // Upgrade Collapse
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
   // *************************** ALERT FUNCTIONS ********************************
   const notifySuccess = (mesage) =>
     toast.success(mesage, {
@@ -741,7 +744,7 @@ export default function App() {
 
   function getFlooredFixed(v, d) {
     return (Math.floor(v * Math.pow(10, d)) / Math.pow(10, d)).toFixed(d);
-}
+  }
 
   return (
 	<div className="App">
@@ -797,21 +800,30 @@ export default function App() {
 							{craftMasterButtonInnerText ? 'CRAFT' : 'CRAFTING...'}
 						</button>
 
-						<div className="d-flex justify-content-center mt-3 mage-block">
-							<img src="./assets/images/mage.png" className="mage-icon" />
-							<p className="mage-text Rajdhani-Medium">15,000 MAGE</p>
-						</div>
-						<button className={`Rajdhani-SemiBold stone-craft btn-upgrade ${upgradeFromMasterToOracleHover ? false : 'disabled'}`} onClick={upgradeMasterToOracleToken}>
-							{upgradeMasterToOracleButtonInnerText ? 'UPGRADE TO ORACLE' : 'UPGRADING...'}
-						</button>
+            { !isCollapsed ?
+              <div className="justify-content-center text-white" style={{marginBottom: "10%"}}>
+                <div className="Rajdhani-Medium pb-1">UPGRADE</div>
+                <img src="./assets/images/icon_upgrade_plus.svg" className="upgrade-icon" onClick={() => setIsCollapsed(!isCollapsed)} />
+              </div>
+            : false }
 
-						<div className="d-flex justify-content-center mt-3 mage-block">
-							<img src="./assets/images/mage.png" className="mage-icon" />
-							<p className="mage-text Rajdhani-Medium">40,000 MAGE</p>
-						</div>
-						<button className={`Rajdhani-SemiBold stone-craft btn-upgrade ${upgradeFromMasterToArchmageHover ? false : 'disabled'}`} onClick={UpgradeMasterToArchmageToken}>
-							{upgradeMasterToArchmageButtonInnerText ? 'UPGRADE TO ARCHMAGE' : 'UPGRADING...'}
-						</button>
+            <div className={`collapse-content-${isCollapsed ? 'expanded' : 'hidden'}`} aria-expanded={isCollapsed}>
+              <div className="d-flex justify-content-center mt-3 mage-block">
+                <img src="./assets/images/mage.png" className="mage-icon" />
+                <p className="mage-text Rajdhani-Medium">15,000 MAGE</p>
+              </div>
+              <button className={`Rajdhani-SemiBold stone-craft btn-upgrade ${upgradeFromMasterToOracleHover ? false : 'disabled'}`} onClick={upgradeMasterToOracleToken}>
+                {upgradeMasterToOracleButtonInnerText ? 'UPGRADE TO ORACLE' : 'UPGRADING...'}
+              </button>
+
+              <div className="d-flex justify-content-center mt-3 mage-block">
+                <img src="./assets/images/mage.png" className="mage-icon" />
+                <p className="mage-text Rajdhani-Medium">40,000 MAGE</p>
+              </div>
+              <button className={`Rajdhani-SemiBold stone-craft btn-upgrade ${upgradeFromMasterToArchmageHover ? false : 'disabled'}`} onClick={UpgradeMasterToArchmageToken}>
+                {upgradeMasterToArchmageButtonInnerText ? 'UPGRADE TO ARCHMAGE' : 'UPGRADING...'}
+              </button>
+            </div>
 					</div>
 				</div>
 				<div className="col-lg-3 d-flex justify-content-center">
@@ -830,13 +842,22 @@ export default function App() {
 								{craftOracleButtonInnerText ? 'CRAFT' : 'CRAFTING...'}
 							</button>
 
-							<div className="d-flex justify-content-center mt-3 mage-block">
-								<img src="./assets/images/mage.png" className="mage-icon" />
-								<p className="mage-text Rajdhani-Medium">25,000 MAGE</p>
-							</div>
-							<button className={`Rajdhani-SemiBold stone-craft btn-upgrade ${upgradeFromOracleToArchmageHover ? false : 'disabled'}`} onClick={upgradeOracleToArchmageToken}>
-								{upgradeOracleToArchmageButtonInnerText ? 'UPGRADE TO ARCHMAGE' : 'UPGRADING...'}
-							</button>
+              { !isCollapsed ?
+              <div className="justify-content-center text-white" style={{marginBottom: "10%"}}>
+                <div className="Rajdhani-Medium pb-1">UPGRADE</div>
+                <img src="./assets/images/icon_upgrade_plus.svg" className="upgrade-icon" onClick={() => setIsCollapsed(!isCollapsed)} />
+              </div>
+              : false }
+
+              <div className={`collapse-content-${isCollapsed ? 'expanded' : 'hidden'}`} aria-expanded={isCollapsed}>
+                <div className="d-flex justify-content-center mt-3 mage-block">
+                  <img src="./assets/images/mage.png" className="mage-icon" />
+                  <p className="mage-text Rajdhani-Medium">25,000 MAGE</p>
+                </div>
+                <button className={`Rajdhani-SemiBold stone-craft btn-upgrade ${upgradeFromOracleToArchmageHover ? false : 'disabled'}`} onClick={upgradeOracleToArchmageToken}>
+                  {upgradeOracleToArchmageButtonInnerText ? 'UPGRADE TO ARCHMAGE' : 'UPGRADING...'}
+                </button>
+              </div>
 						</div>
 
 					</div>
