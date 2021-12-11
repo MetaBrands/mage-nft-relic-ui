@@ -761,7 +761,7 @@ export default function App() {
 						<div className="meta-fox d-flex justify-content-center align-items-center">
 							<img src="./assets/images/meta_fox.svg" className="meta-fox-icon"/>
 						</div>
-						<div className="text-white wallet-address">
+						<div className="Rajdhani-SemiBold text-white wallet-address">
 							{ error ? getErrorMessage(error) : active ? `${account.substring(0, 6)}...${account.substring(account.length - 6)}` : 'Connect Wallet'}
 						</div>
 					</div>
@@ -783,7 +783,7 @@ export default function App() {
 				<div className="main-title">
 					<h1 className="text-white relic-text Rajdhani-Bold">MAGE RELIC NFTS</h1>
 				</div>
-				<p className="text-block Rajdhani-SemiBold">SACRIFICE MAGE TOKENS TO CLAIM YOUR RELIC TO THE METAVERSE...</p>
+				<p className="text-block Rajdhani-SemiBold">SACRIFICE MAGE TOKENS TO CLAIM YOUR MULTI-PASS TO THE METAVERSE...</p>
 			</section>
 			<section className="art-section row m-0">
 				<div className="col-lg-3 d-flex justify-content-center">
@@ -879,7 +879,7 @@ export default function App() {
 					</div>
 				</div>
 			</section>
-			<section className="text-center mt-5">
+			<section className="text-center" style={{ marginTop: "150px" }}>
 				<p className="paper-text Rajdhani-Medium">LEARN MORE ABOUT MAGE RELIC NFTS</p>
 				<img src="./assets/images/mb_scroll.png" className="mb-scroll" />
 				<a href='https://whitepaper.metabrands.io/' target='_BLANK'><button className="paper-btn">WHITE PAPER</button></a>

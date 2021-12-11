@@ -130,6 +130,10 @@
     background-color: #3ecfcb;
 }
 
+.fox-wallet {
+    background-color: #3ecfcb !important;
+}
+
 .wallet-address {
     /* background-color: #2fc4c8; */
     border: none;
