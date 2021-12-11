@@ -232,6 +232,10 @@
     border-radius: 20px;
 }
 
+.learn-more-section {
+    padding-top: 150px;
+}
+
 .foot-text {
     color: #4d4d4d;
     margin-top: 4%;
@@ -306,7 +310,9 @@
 }
 
 @media (max-width: 780px) {
-
+    .learn-more-section {
+        padding-top: 3rem;
+    }
 }
 
 @media(max-width: 756px) {

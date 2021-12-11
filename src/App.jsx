@@ -879,7 +879,7 @@ export default function App() {
 					</div>
 				</div>
 			</section>
-			<section className="text-center" style={{ marginTop: "150px" }}>
+			<section className="learn-more-section text-center">
 				<p className="paper-text Rajdhani-Medium">LEARN MORE ABOUT MAGE RELIC NFTS</p>
 				<img src="./assets/images/mb_scroll.png" className="mb-scroll" />
 				<a href='https://whitepaper.metabrands.io/' target='_BLANK'><button className="paper-btn">WHITE PAPER</button></a>
