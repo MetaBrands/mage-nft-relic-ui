@@ -1,3 +1,7 @@
+:root {
+    --toastify-color-light: #fff !important;
+}
+
 /* font style */
 
 @font-face {
@@ -41,6 +45,34 @@
     font-family: "Rajdhani-SemiBold";
 }
 
+.text-white {
+    color: #fff;
+}
+
+.text-green {
+    color: #7efdd8;
+}
+
+.no-relic {
+    opacity: 0.5;
+}
+
+.noti-success {
+    background-color: #39b54a !important;
+}
+
+.noti-error {
+    background-color: #ed1c24 !important;
+}
+
+.noti-info {
+    background-color: #00a3bf !important;
+}
+
+.noti-warn {
+    background-color: #00a3bf !important;
+}
+
 .meta-body {
     background-color: #1a0f21;
     padding: 1% 1%;
@@ -58,6 +90,10 @@
     margin: 5px;
 }
 
+.logo {
+    max-width: 256px;
+}
+
 .meta-fox {
     /* background-color: #2fc4c8; */
     border: none;
@@ -65,15 +101,37 @@
     position: relative;
     width: 40px;
     height: 40px;
+    margin-left: 10px;
 }
 
 .meta-fox-icon {
-    width: 34px;
-    height: 34px;
+    width: 30px;
+    height: 30px;
 }
 
-.font-white {
-    color: white;
+.mage-icon {
+    width: 30px;
+    height: 30px;
+}
+
+.upgrade-icon {
+    display: block;
+    width: 28px;
+    height: 28px;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    border: 2px solid #3ecfcb;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+.upgrade-icon:hover {
+    background-color: #3ecfcb;
+}
+
+.fox-wallet {
+    background-color: #3ecfcb !important;
 }
 
 .wallet-address {
@@ -98,7 +156,7 @@
     width: 50%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 5%;
+    margin-top: 2%;
 }
 
 .main-title {
@@ -109,6 +167,15 @@
     color: #999999;
     margin-top: 2%;
     font-size: 16px;
+}
+
+.collapse-content-hidden {
+    display: none;
+}
+
+.collapse-content-expanded {
+    display: block;
+    width: 100%;
 }
 
 .art-section {
@@ -148,12 +215,25 @@
     height: 220px;
 }
 
+.mb-scroll {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 25px;
+    width: 150px;
+    height: 150px;
+}
+
 .paper-btn {
-    background-color: #2fc4c8;
+    background-color: #3d2551;
     color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 20px;
+}
+
+.learn-more-section {
+    padding-top: 150px;
 }
 
 .foot-text {
@@ -167,11 +247,11 @@
 .stone-craft {
     background: transparent;
     color: white;
-    border: 1px solid #40d1cc;
-    padding: 6px 0;
-    margin-top: 7%;
-    font-size: 14px;
-    width: 40%;
+    border: 1px solid #3ecfcb;
+    padding: 10px;
+    margin-bottom: 10%;
+    /*font-size: 14px;*/
+    width: 45%;
     border-bottom-left-radius: 15px;
     border-top-right-radius: 15px;
     transition: .5s;
@@ -195,13 +275,8 @@
     font-weight: bold;
 }
 
-.mage-icon {
-    width: 30px;
-    height: 30px;
-}
-
 .mage-text {
-    color: #888789;
+    color: #fff;
     font-size: 16px;
     margin-left: 3%;
     padding-top: 3px;
@@ -235,7 +310,9 @@
 }
 
 @media (max-width: 780px) {
-
+    .learn-more-section {
+        padding-top: 3rem;
+    }
 }
 
 @media(max-width: 756px) {
@@ -265,7 +342,7 @@
 /* Custom CSS */
 
 .disabled {
-    opacity: 0.3;
+    opacity: 0.5;
 }
 
 .cursorpointer{
@@ -273,16 +350,20 @@
 }
 
 .stone-craft:hover {
-    opacity: 0.5;
+    background-color: #3ecfcb;
+}
+
+.btn-upgrade:hover {
+    background-color: #3ecfcb;
 }
 
 .stone-craftown {
     background: transparent;
     color: white;
-    border: 1px solid #40d1cc;
+    border: 1px solid #3ecfcb;
     margin: 5px;
     font-size: 14px;
-    min-width: 20%;
+    min-width: 100%;
     border-bottom-left-radius: 15px;
     border-top-right-radius: 15px;
     transition: .5s;
