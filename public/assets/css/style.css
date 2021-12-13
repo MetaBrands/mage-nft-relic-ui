@@ -114,6 +114,21 @@
     height: 30px;
 }
 
+.glow-animation {
+    animation: glow 1s infinite alternate;
+    border-radius: 50%;
+    padding: 1px;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 2px -2px #79fad7;
+    }
+    to {
+        box-shadow: 0 0 2px 2px #79fad7;
+    }
+}
+
 .upgrade-icon {
     display: block;
     width: 28px;

@@ -436,7 +436,7 @@ export default function App() {
 			setTimeout(() => {
 				notifyError('MASTER Relic NFT Crafting Failed')
 				verifyERC20()
-				setCraftMasterButtonInnerText(true)				
+				setCraftMasterButtonInnerText(true)
 			}, 500);
 		}
       }
@@ -498,7 +498,7 @@ export default function App() {
 			setTimeout(() => {
 				notifyError('ORACLE Relic NFT Crafting Failed')
 				verifyERC20()
-				setCraftOracleButtonInnerText(true)				
+				setCraftOracleButtonInnerText(true)
 			}, 500);
 		}
       }
@@ -560,7 +560,7 @@ export default function App() {
 			setTimeout(() => {
 				notifyError('ARCHMAGE Relic NFT Crafting Failed')
 				verifyERC20()
-				setCraftArchmageButtonInnerText(true)				
+				setCraftArchmageButtonInnerText(true)
 			}, 500);
 		}
       }
@@ -847,7 +847,7 @@ export default function App() {
 					<div className="text-right mt-2">
 					{ addTokenButton ?
 						<div className="cursorpointer" onClick={() => AddTokenToWallet()}>
-							<div className="d-inline-block">
+							<div className="d-inline-block glow-animation">
 								<img width="30px" src="./assets/images/mage.png" />
 							</div>
 							<div className="d-inline-block text-white wallet-address px-0">
