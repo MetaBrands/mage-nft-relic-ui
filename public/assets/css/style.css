@@ -115,18 +115,22 @@
 }
 
 .glow-animation {
-    animation: glow 1s infinite alternate;
+    border: 2px solid transparent;
     border-radius: 50%;
-    padding: 1px;
+    animation: glow 1.5s infinite alternate;
+    -webkit-animation: glow 1.5s infinite alternate;
+    -webkit-transition: border 1.5s linear, box-shadow 1.5s linear;
+    -moz-transition: border 1.5s linear, box-shadow 1.5s linear;
+    transition: border 1.5s linear, box-shadow 1.5s linear;
 }
 
 @keyframes glow {
-    from {
-        box-shadow: 0 0 2px -2px #79fad7;
-    }
     to {
-        box-shadow: 0 0 2px 2px #79fad7;
-    }
+        border-color: #79fad7;
+        box-shadow: 0 0 5px #79fad7;
+        -webkit-box-shadow: 0 0 5px #79fad7;
+        -moz-box-shadow: 0 0 5px #79fad7;
+   }
 }
 
 .upgrade-icon {
