@@ -431,7 +431,14 @@ export default function App() {
         if (e.code === 4001) {
           notifyError("Rejected MASTER Relic NFT Crafting");
           verifyERC20();
-        }
+        }else{
+			toast.dismiss()
+			setTimeout(() => {
+				notifyError('MASTER Relic NFT Crafting Failed')
+				verifyERC20()
+				setCraftMasterButtonInnerText(true)				
+			}, 500);
+		}
       }
     } else {
       notifyError("Insufficient MAGE Tokens");
@@ -460,7 +467,7 @@ export default function App() {
         let res = await contracterc721Oracle.mintNFT("ORACLE");
         setCraftOracleButtonInnerText(false);
 
-        const transactionLink = `https://rinkeby.etherscan.io/tx/${res.hash}`;
+        const transactionLink = `${process.env.REACT_APP_EXPLORER}/${res.hash}`;
         function redirectToTransaction() {
           window.open(transactionLink, "_blank");
         }
@@ -486,7 +493,14 @@ export default function App() {
         if (e.code === 4001) {
           notifyError("Rejected ORACLE Relic NFT Crafting");
           verifyERC20();
-        }
+        }else{
+			toast.dismiss()
+			setTimeout(() => {
+				notifyError('ORACLE Relic NFT Crafting Failed')
+				verifyERC20()
+				setCraftOracleButtonInnerText(true)				
+			}, 500);
+		}
       }
     } else {
       notifyError("Insufficient MAGE Tokens");
@@ -515,7 +529,7 @@ export default function App() {
         let res = await contracterc721Archmage.mintNFT("ARCHMAGE");
         setCraftArchmageButtonInnerText(false);
 
-        const transactionLink = `https://rinkeby.etherscan.io/tx/${res.hash}`;
+        const transactionLink = `${process.env.REACT_APP_EXPLORER}/${res.hash}`;
         function redirectToTransaction() {
           window.open(transactionLink, "_blank");
         }
@@ -541,7 +555,14 @@ export default function App() {
         if (e.code === 4001) {
           notifyError("Rejected ARCHMAGE Relic NFT Crafting");
           verifyERC20();
-        }
+        }else{
+			toast.dismiss()
+			setTimeout(() => {
+				notifyError('ARCHMAGE Relic NFT Crafting Failed')
+				verifyERC20()
+				setCraftArchmageButtonInnerText(true)				
+			}, 500);
+		}
       }
     } else {
       notifyError("Insufficient MAGE Tokens");
@@ -570,7 +591,7 @@ export default function App() {
         let res = await contracterc721Master.upgradeNFT("MASTER", "ORACLE");
         setUpgradeMasterToOracleButtonInnerText(false);
 
-        const transactionLink = `https://rinkeby.etherscan.io/tx/${res.hash}`;
+        const transactionLink = `${process.env.REACT_APP_EXPLORER}/${res.hash}`;
         function redirectToTransaction() {
           window.open(transactionLink, "_blank");
         }
@@ -596,7 +617,14 @@ export default function App() {
         if (e.code === 4001) {
           notifyError("Rejected MASTER to ORACLE Upgrade");
           verifyERC20();
-        }
+        }else{
+			toast.dismiss()
+			setTimeout(() => {
+				notifyError('MASTER to ORACLE Relic NFT Crafting Failed')
+				verifyERC20()
+				setUpgradeMasterToOracleButtonInnerText(true)
+			}, 500);
+		}
       }
     } else {
       if (masterNFT < 1) notifyError("No MASTER Relic");
@@ -626,7 +654,7 @@ export default function App() {
         let res = await contracterc721Master.upgradeNFT("ORACLE", "ARCHMAGE");
         setUpgradeOracleToArchmageButtonInnerText(false);
 
-        const transactionLink = `https://rinkeby.etherscan.io/tx/${res.hash}`;
+        const transactionLink = `${process.env.REACT_APP_EXPLORER}/${res.hash}`;
         function redirectToTransaction() {
           window.open(transactionLink, "_blank");
         }
@@ -653,7 +681,14 @@ export default function App() {
         if (e.code === 4001) {
           notifyError("Rejected ORACLE to ARCHMAGE Upgrade");
           verifyERC20();
-        }
+        }else{
+			toast.dismiss()
+			setTimeout(() => {
+				notifyError('ORACLE to ARCHMAGE Relic NFT Crafting Failed')
+				verifyERC20()
+				setUpgradeOracleToArchmageButtonInnerText(true)
+			}, 500);
+		}
       }
     } else {
       if (oracleNFT < 1) notifyError("No ORACLE Relic");
@@ -682,7 +717,7 @@ export default function App() {
         let res = await contracterc721Master.upgradeNFT("MASTER", "ARCHMAGE");
         setUpgradeMasterToArchmageButtonInnerText(false);
 
-        const transactionLink = `https://rinkeby.etherscan.io/tx/${res.hash}`;
+        const transactionLink = `${process.env.REACT_APP_EXPLORER}/${res.hash}`;
         function redirectToTransaction() {
           window.open(transactionLink, "_blank");
         }
@@ -709,7 +744,14 @@ export default function App() {
         if (e.code === 4001) {
           notifyError("Rejected MASTER to ARCHMAGE Upgrade");
           verifyERC20();
-        }
+        }else{
+			toast.dismiss()
+			setTimeout(() => {
+				notifyError('MASTER to ARCHMAGE Relic NFT Crafting Failed')
+				verifyERC20()
+				setUpgradeMasterToArchmageButtonInnerText(true)
+			}, 500);
+		}
       }
     } else {
       if (masterNFT < 1) notifyError("No MASTER Relic");
