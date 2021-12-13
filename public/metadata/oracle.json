@@ -1,13 +1,10 @@
 {
-  "description": "...",
-  "external_url": "https://metabrands-prexis.vercel.app/tokens/oracle.png",
-  "image": "https://metabrands-prexis.vercel.app/tokens/oracle.png",
-  "name": "Metabrands Oracle",
+  "name": "Oracle Relic",
+  "description": "The Oracle MAGE Relic, a Multi-Pass to the Metaverse, granting the owner of this magical relic special benefits and permissions in the MetaBrands ecosystem in the form of DAO participation, whitelisting, and others powers yet to be discovered...",
+  "external_url": "https://metabrands.io/assets/oracle.png",
+  "image": "https://metabrands.io/assets/oracle.png",
   "attributes": [
-    { "trait_type": "prop1", "value": 3 },
-    { "trait_type": "prop2", "value": 4 },
-    { "trait_type": "prop3", "value": 2 },
-    { "trait_type": "prop4", "value": 4 },
-    { "trait_type": "prop5", "value": 15 }
+    { "trait_type": "Relic Type", "value": "Oracle" },
+    { "trait_type": "Tier", "value": 2 }
   ]
 }
