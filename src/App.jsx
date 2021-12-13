@@ -865,7 +865,7 @@ export default function App() {
 				</div>
 				<div className="col-lg-3 d-flex justify-content-center">
 					<div className="stone t-2">
-						<h4 className="text-white" style={{ marginTop: "10%" }}>ORACLE</h4>
+						<h4 className="text-white Rajdhani-Bold" style={{ marginTop: "10%" }}>ORACLE</h4>
 						<p><span className={`${oracleNFT ? 'text-green' : 'text-white no-relic'}`}>{oracleNFT ? Number(oracleNFT) : 0}</span></p>
 						<img src="./assets/images/stone_2.png" className="stone-2"/>
 						<div className="d-flex justify-content-around craft-group flexown">
@@ -901,7 +901,7 @@ export default function App() {
 				</div>
 				<div className="col-lg-3 d-flex justify-content-center">
 					<div className="stone t-2">
-						<h4 className="text-white" style={{ marginTop: "10%" }}>ARCHMAGE</h4>
+						<h4 className="text-white Rajdhani-Bold" style={{ marginTop: "10%" }}>ARCHMAGE</h4>
 						<p><span className={`${archmageNFT ? 'text-green' : 'text-white no-relic'}`}>{archmageNFT ? Number(archmageNFT) : 0}</span> </p>
 						<img src="./assets/images/stone_3.png" className="stone-3" />
 						<div className="d-flex justify-content-center mt-4 mage-block">
