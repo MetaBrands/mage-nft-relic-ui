@@ -863,6 +863,11 @@ export default function App() {
 					<h1 className="text-white relic-text Rajdhani-Bold">MAGE RELIC NFTS</h1>
 				</div>
 				<p className="text-block Rajdhani-SemiBold">SACRIFICE MAGE TOKENS TO CLAIM YOUR MULTI-PASS TO THE METAVERSE...</p>
+        <div style={{ marginBottom: "2rem" }}>
+          <a href='https://app.uniswap.org/#/swap?outputCurrency=0xdac17f958d2ee523a2206206994597c13d831ec7' target='_BLANK'>
+            <button className="btn-secondary btn-secondary-uniswap"><img src="./assets/images/uniswap_icon.svg" className="uniswap-icon"/> <span style={{ verticalAlign: "middle" }}>TRADE MAGE</span></button>
+          </a>
+        </div>
 			</section>
 			<section className="art-section row m-0">
 				<div className="col-lg-3 d-flex justify-content-center">
@@ -961,7 +966,7 @@ export default function App() {
 			<section className="learn-more-section text-center">
 				<p className="paper-text Rajdhani-Medium">LEARN MORE ABOUT MAGE RELIC NFTS</p>
 				<img src="./assets/images/mb_scroll.png" className="mb-scroll" />
-				<a href='https://whitepaper.metabrands.io/' target='_BLANK'><button className="paper-btn">WHITE PAPER</button></a>
+				<a href='https://whitepaper.metabrands.io/' target='_BLANK'><button className="btn-secondary">WHITE PAPER</button></a>
 			</section>
 			<footer className="foot-text Rajdhani-Medium">
 				<p>

@@ -114,6 +114,12 @@
     height: 30px;
 }
 
+.uniswap-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
 .glow-animation {
     border: 2px solid transparent;
     border-radius: 50%;
@@ -243,12 +249,17 @@
     height: 150px;
 }
 
-.paper-btn {
+.btn-secondary {
     background-color: #3d2551;
     color: white;
     border: none;
     padding: 10px 20px;
-    border-radius: 20px;
+    border-radius: 30px;
+}
+
+.btn-secondary-uniswap {
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .learn-more-section {
