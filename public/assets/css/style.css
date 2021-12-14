@@ -114,6 +114,25 @@
     height: 30px;
 }
 
+.glow-animation {
+    border: 2px solid transparent;
+    border-radius: 50%;
+    animation: glow 1.5s infinite alternate;
+    -webkit-animation: glow 1.5s infinite alternate;
+    -webkit-transition: border 1.5s linear, box-shadow 1.5s linear;
+    -moz-transition: border 1.5s linear, box-shadow 1.5s linear;
+    transition: border 1.5s linear, box-shadow 1.5s linear;
+}
+
+@keyframes glow {
+    to {
+        border-color: #79fad7;
+        box-shadow: 0 0 5px #79fad7;
+        -webkit-box-shadow: 0 0 5px #79fad7;
+        -moz-box-shadow: 0 0 5px #79fad7;
+   }
+}
+
 .upgrade-icon {
     display: block;
     width: 28px;
