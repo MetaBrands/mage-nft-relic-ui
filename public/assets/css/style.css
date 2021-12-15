@@ -254,12 +254,9 @@
     color: white;
     border: none;
     padding: 10px 20px;
-    border-radius: 30px;
-}
-
-.btn-secondary-uniswap {
     padding-top: 5px;
     padding-bottom: 5px;
+    border-radius: 30px;
 }
 
 .learn-more-section {

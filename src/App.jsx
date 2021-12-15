@@ -864,8 +864,8 @@ export default function App() {
 				</div>
 				<p className="text-block Rajdhani-SemiBold">SACRIFICE MAGE TOKENS TO CLAIM YOUR MULTI-PASS TO THE METAVERSE...</p>
         <div style={{ marginBottom: "2rem" }}>
-          <a href='https://app.uniswap.org/#/swap?outputCurrency=0xdac17f958d2ee523a2206206994597c13d831ec7' target='_BLANK'>
-            <button className="btn-secondary btn-secondary-uniswap"><img src="./assets/images/uniswap_icon.svg" className="uniswap-icon"/> <span style={{ verticalAlign: "middle" }}>TRADE MAGE</span></button>
+          <a href='https://app.uniswap.org/#/swap?outputCurrency=0xd52aae39a2b5cc7812f7b9450ebb61dfef702b15' target='_BLANK'>
+            <button className="btn-secondary"><img src="./assets/images/uniswap_icon.svg" className="uniswap-icon"/> <span style={{ verticalAlign: "middle" }}>TRADE MAGE</span></button>
           </a>
         </div>
 			</section>
