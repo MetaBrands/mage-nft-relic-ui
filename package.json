@@ -1,9 +1,9 @@
 {
   "name": "mb-nft-reflic-frontend",
-  "description": "A dapp built for crafting MetaBrands NFT Relics.",
-  "version": "0.2.0",
+  "description": "An open source interface to interact with the decentralized NFT relics",
+  "version": "1.0.0",
   "private": false,
-  "author": "Andreas Bigger <bigger@usc.edu>",
+  "author": "MetaBrands.io",
   "dependencies": {
     "@material-ui/core": "^4.12.3",
     "@testing-library/react": "^12.1.2",
