@@ -8,14 +8,25 @@ toast.configure();
 // Dotenv
 require("dotenv").config();
 
-// Chain ID
+// Providers
 import { InjectedConnector } from "@web3-react/injected-connector";
+import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
+
+// Metamask
 const injected = new InjectedConnector({
   supportedChainIds: [Number(process.env.REACT_APP_CHAINID)],
 });
 
+// WalletConnect
+const walletconnect = new WalletConnectConnector({
+	rpc: { 
+		4: process.env.REACT_APP_INFURA_RPC,
+	}
+  })
+
+
 import {
-  Web3ReactProvider,
+
   useWeb3React,
   UnsupportedChainIdError,
 } from "@web3-react/core";
@@ -33,14 +44,25 @@ import MetaBrands from "./utils/MetaBrands.json";
 import NFT from "./utils/NFT.json";
 
 export default function App() {
+  const [activatingConnector, setActivatingConnector] = useState();
+
+
   const {
     active,
     account,
+    library,
+    connector,
     chainId,
     error,
     activate,
-    deactivate,
+    deactivate
   } = useWeb3React();
+
+  useEffect(() => {
+    if (activatingConnector && activatingConnector === connector) {
+      setActivatingConnector(undefined)
+    }
+  }, [activatingConnector, connector])
 
   // *************************** USE EFFECTS ***************************
 
@@ -59,6 +81,7 @@ export default function App() {
   useEffect(() => {
     if (active) {
       verifyNetwork();
+      setShowModal(true);
     }
     if (error) {
       let err = getErrorMessage(error);
@@ -68,6 +91,10 @@ export default function App() {
   }, [chainId, account, active, error]);
 
   // *************************** USE STATES ***************************
+const [walletType, setWalletType] = useState()
+
+// Modal
+const [hideModal, setShowModal] = useState(true)
 
   // Craft buttons
   const [craftMasterButton, setCraftMasterButton] = useState(true);
@@ -265,8 +292,9 @@ export default function App() {
 
   async function verifyERC20() {
     // Instantiating a new contract
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    await window.ethereum.request({ method: "eth_requestAccounts" });
+    const provider = new ethers.providers.JsonRpcProvider(
+      process.env.REACT_APP_INFURA_RPC
+    );       
     const contract = new ethers.Contract(
       process.env.REACT_APP_MAGE_ADDR,
       MetaBrands,
@@ -301,21 +329,15 @@ export default function App() {
       setCraftArchmageButton(true);
       setCraftArchmageHover(false);
     }
-
-    verifyERC721();
+    verifyERC721(provider);
   }
 
-  async function verifyERC721() {
-    // Instantiating a new contract
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    await window.ethereum.request({ method: "eth_requestAccounts" });
-    const signerx = provider.getSigner(0);
-
+  async function verifyERC721(provider) {
     // ERC721-MASTER
     const contracterc721Master = new ethers.Contract(
       process.env.REACT_APP_MASTER_ADDR,
       NFT,
-      signerx
+      provider
     );
     let res721Master = await contracterc721Master.balanceOf(account);
     let masterNFT = res721Master.toNumber();
@@ -325,7 +347,7 @@ export default function App() {
     const contracterc721Oracle = new ethers.Contract(
       process.env.REACT_APP_ORACLE_ADDR,
       NFT,
-      signerx
+      provider
     );
     let res721Oracle = await contracterc721Oracle.balanceOf(account);
     let oracleNFT = res721Oracle.toNumber();
@@ -335,7 +357,7 @@ export default function App() {
     const contracterc721Archmage = new ethers.Contract(
       process.env.REACT_APP_ARCHMAGE_ADDR,
       NFT,
-      signerx
+      provider
     );
     let res721Archmage = await contracterc721Archmage.balanceOf(account);
     setArchmageNFT(res721Archmage.toNumber());
@@ -389,8 +411,7 @@ export default function App() {
     if(!isWalletConnected) return;
 
     // Instantiating a new contract
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    await window.ethereum.request({ method: "eth_requestAccounts" });
+    const provider = new ethers.providers.Web3Provider(library.currentProvider);
     const signerx = provider.getSigner(0);
 
     // Craft Master Tokens
@@ -451,8 +472,7 @@ export default function App() {
     if(!isWalletConnected) return;
 
     // Instantiating a new contract
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    await window.ethereum.request({ method: "eth_requestAccounts" });
+    const provider = new ethers.providers.Web3Provider(library.currentProvider);
     const signerx = provider.getSigner(0);
 
     // Craft Oracle Token
@@ -513,8 +533,7 @@ export default function App() {
     if(!isWalletConnected) return;
 
     // Instantiating a new contract
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    await window.ethereum.request({ method: "eth_requestAccounts" });
+    const provider = new ethers.providers.Web3Provider(library.currentProvider);
     const signerx = provider.getSigner(0);
 
     // Craft Archmage Token
@@ -576,8 +595,7 @@ export default function App() {
     if(!isWalletConnected) return;
 
     // Instantiating a new contract
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    await window.ethereum.request({ method: "eth_requestAccounts" });
+    const provider = new ethers.providers.Web3Provider(library.currentProvider);
     const signerx = provider.getSigner(0);
 
     // Upgrade Master to Oracle Token
@@ -639,8 +657,7 @@ export default function App() {
     if(!isWalletConnected) return;
 
     // Instantiating a new contract
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    await window.ethereum.request({ method: "eth_requestAccounts" });
+    const provider = new ethers.providers.Web3Provider(library.currentProvider);
     const signerx = provider.getSigner(0);
 
     // Upgrade Oracle to Archmage Token
@@ -703,8 +720,7 @@ export default function App() {
     if(!isWalletConnected) return;
 
     // Instantiating a new contract
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    await window.ethereum.request({ method: "eth_requestAccounts" });
+    const provider = new ethers.providers.Web3Provider(library.currentProvider);
     const signerx = provider.getSigner(0);
 
     if (masterNFT >= 1 && tokenERC20 >= 40_000) {
@@ -827,6 +843,54 @@ export default function App() {
 
   return (
 	<div className="App">
+    <div
+        className={`modalPositionRelative glassmorphism modalWallet ${
+          hideModal ? `hideModal` : false
+        }`}
+      >
+        <button
+          className="modalbackgroundInvisible"
+          onClick={() => {
+            setShowModal(!hideModal);
+          }}
+        >
+          ❌
+        </button>
+        <div>
+          <h1 className="modalTitle">Select your wallet</h1>
+          <div className="modalDivButtons">
+            <button
+              className="modalButton"
+              onClick={() => {
+                active ? deactivate() : activate(injected);
+              }}
+            >
+              <img
+                width={30}
+                className="m-2"
+                src="https://cdn.iconscout.com/icon/free/png-256/metamask-2728406-2261817.png"
+                alt=""
+              />
+              Metamask
+            </button>
+            <button
+              className="modalButton"
+              onClick={() => {
+                active ? deactivate() : activate(walletconnect);
+              }}
+            >
+              <img
+                width={30}
+                className="m-2"
+                src="https://api.nuget.org/v3-flatcontainer/walletconnect.desktop/1.6.5/icon"
+                alt=""
+              />
+              Wallet Connect
+            </button>
+          </div>
+        </div>
+      </div>
+    
 		<main className="meta-body">
 			<header className="meta-header">
 				<div className="meta-logo logo-block">
@@ -836,7 +900,7 @@ export default function App() {
 				</div>
 
 				<div>
-					<div className="d-flex justify-content-between align-items-center fox-wallet cursorpointer stone-craftown" onClick={() => {active ? resetGeneralDeactive() : connectWallet()}}>
+					<div className="d-flex justify-content-between align-items-center fox-wallet cursorpointer stone-craftown" onClick={() => {active ? resetGeneralDeactive() : setShowModal(!hideModal)}}>
 						<div className="meta-fox d-flex justify-content-center align-items-center">
 							<img src="./assets/images/meta_fox.svg" className="meta-fox-icon"/>
 						</div>
