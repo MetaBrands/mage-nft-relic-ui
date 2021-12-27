@@ -5,6 +5,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 toast.configure();
 
+// Modal CSS
+import "./modalWallet.css"
+
 // Dotenv
 require("dotenv").config();
 
