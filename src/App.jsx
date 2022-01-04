@@ -291,8 +291,11 @@ export default function App() {
     ) {
       return "Authorize this website to access your Ethereum account.";
     } else {
-      console.error(error);
-      return "An unknown error occurred. Check the console for more details.";
+      if(error.message = "User closed modal"){
+        return "Authorize this website to access your Ethereum account.";        
+      }else{
+        return "An unknown error occurred. Check the console for more details.";
+      }
     }
   }
 
