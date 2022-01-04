@@ -1,19 +1,16 @@
 /* eslint-disable */
 import React, { useState, useEffect } from "react";
 // Toastify
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 toast.configure();
-
-// Modal CSS
-import "./modalWallet.css"
 
 // Dotenv
 require("dotenv").config();
 
 // Providers
 import { InjectedConnector } from "@web3-react/injected-connector";
-import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
+import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
 
 // Metamask
 const injected = new InjectedConnector({
@@ -22,17 +19,12 @@ const injected = new InjectedConnector({
 
 // WalletConnect
 const walletconnect = new WalletConnectConnector({
-	rpc: { 
-		4: process.env.REACT_APP_INFURA_RPC,
-	}
-  })
+  rpc: {
+    4: process.env.REACT_APP_INFURA_RPC,
+  },
+});
 
-
-import {
-
-  useWeb3React,
-  UnsupportedChainIdError,
-} from "@web3-react/core";
+import { useWeb3React, UnsupportedChainIdError } from "@web3-react/core";
 import {
   NoEthereumProviderError,
   UserRejectedRequestError as UserRejectedRequestErrorInjected,
@@ -49,7 +41,6 @@ import NFT from "./utils/NFT.json";
 export default function App() {
   const [activatingConnector, setActivatingConnector] = useState();
 
-
   const {
     active,
     account,
@@ -58,14 +49,14 @@ export default function App() {
     chainId,
     error,
     activate,
-    deactivate
+    deactivate,
   } = useWeb3React();
 
   useEffect(() => {
     if (activatingConnector && activatingConnector === connector) {
-      setActivatingConnector(undefined)
+      setActivatingConnector(undefined);
     }
-  }, [activatingConnector, connector])
+  }, [activatingConnector, connector]);
 
   // *************************** USE EFFECTS ***************************
 
@@ -94,10 +85,21 @@ export default function App() {
   }, [chainId, account, active, error]);
 
   // *************************** USE STATES ***************************
-const [walletType, setWalletType] = useState()
+  const [walletType, setWalletType] = useState();
 
-// Modal
-const [hideModal, setShowModal] = useState(true)
+  // Modal
+  const [hideModal, setShowModal] = useState(true);
+
+  useEffect(() => {
+    console.log(hideModal);
+    if (!hideModal) {
+      document.getElementsByClassName("meta-body")[0].style.filter = "blur(1px)";
+      document.getElementsByClassName("meta-body")[0].style.opacity = "0.9";
+    } else {
+      document.getElementsByClassName("meta-body")[0].style.filter = "none";
+      document.getElementsByClassName("meta-body")[0].style.opacity = "1";
+    }
+  }, [hideModal]); // <-- here put the parameter to listen
 
   // Craft buttons
   const [craftMasterButton, setCraftMasterButton] = useState(true);
@@ -175,7 +177,7 @@ const [hideModal, setShowModal] = useState(true)
       position: toast.POSITION.TOP_CENTER,
       className: "noti-success",
       bodyClassName: "text-center text-white",
-	  icon: () => <img src="./assets/images/icon_check.svg" width={'24px'}/>
+      icon: () => <img src="./assets/images/icon_check.svg" width={"24px"} />,
     });
 
   const notifyError = (mesage) =>
@@ -183,7 +185,7 @@ const [hideModal, setShowModal] = useState(true)
       position: toast.POSITION.TOP_CENTER,
       className: "noti-error",
       bodyClassName: "text-center text-white",
-	  icon: () => <img src="./assets/images/icon_warning.svg" width={'24px'}/>
+      icon: () => <img src="./assets/images/icon_warning.svg" width={"24px"} />,
     });
 
   const notifyTransactionInfo = (mesage, clickfunction) =>
@@ -194,15 +196,17 @@ const [hideModal, setShowModal] = useState(true)
       onClick: clickfunction,
       className: "noti-info",
       bodyClassName: "text-center text-white",
-	  icon: () => <img src="./assets/images/icon_magnifying_glass.svg" width={'24px'}/>
+      icon: () => (
+        <img src="./assets/images/icon_magnifying_glass.svg" width={"24px"} />
+      ),
     });
 
   const notifyInfo = (mesage) =>
     toast.warn(mesage, {
       position: toast.POSITION.TOP_CENTER,
       className: "noti-warn",
-	  bodyClassName: "text-center text-white",
-	  icon: () => <img src="./assets/images/icon_warning.svg" width={'24px'}/>
+      bodyClassName: "text-center text-white",
+      icon: () => <img src="./assets/images/icon_warning.svg" width={"24px"} />,
     });
 
   // ******************************** ADD TOKEN FUNCTION ************************************
@@ -235,7 +239,7 @@ const [hideModal, setShowModal] = useState(true)
   // *************************** CHANGE NETWORK FUNCTION *************************************
 
   async function connectWallet() {
-    if(isConnecting) return;
+    if (isConnecting) return;
     isConnecting = true;
 
     if (window.ethereum) {
@@ -252,9 +256,8 @@ const [hideModal, setShowModal] = useState(true)
   }
 
   async function checkWalletConnection(notification = true) {
-    if(!active) {
-      if(notification)
-        notifyInfo("Please connect your wallet");
+    if (!active) {
+      if (notification) notifyInfo("Please connect your wallet");
 
       return false;
     }
@@ -297,7 +300,7 @@ const [hideModal, setShowModal] = useState(true)
     // Instantiating a new contract
     const provider = new ethers.providers.JsonRpcProvider(
       process.env.REACT_APP_INFURA_RPC
-    );       
+    );
     const contract = new ethers.Contract(
       process.env.REACT_APP_MAGE_ADDR,
       MetaBrands,
@@ -411,7 +414,7 @@ const [hideModal, setShowModal] = useState(true)
   // Craft Master
   async function craftMasterToken() {
     const isWalletConnected = await checkWalletConnection();
-    if(!isWalletConnected) return;
+    if (!isWalletConnected) return;
 
     // Instantiating a new contract
     const provider = new ethers.providers.Web3Provider(library.currentProvider);
@@ -455,14 +458,14 @@ const [hideModal, setShowModal] = useState(true)
         if (e.code === 4001) {
           notifyError("Rejected MASTER Relic NFT Crafting");
           verifyERC20();
-        }else{
-			toast.dismiss()
-			setTimeout(() => {
-				notifyError('MASTER Relic NFT Crafting Failed')
-				verifyERC20()
-				setCraftMasterButtonInnerText(true)
-			}, 500);
-		}
+        } else {
+          toast.dismiss();
+          setTimeout(() => {
+            notifyError("MASTER Relic NFT Crafting Failed");
+            verifyERC20();
+            setCraftMasterButtonInnerText(true);
+          }, 500);
+        }
       }
     } else {
       notifyError("Insufficient MAGE Tokens");
@@ -472,7 +475,7 @@ const [hideModal, setShowModal] = useState(true)
   // Craft Oracle
   async function cratOracleToken() {
     const isWalletConnected = await checkWalletConnection();
-    if(!isWalletConnected) return;
+    if (!isWalletConnected) return;
 
     // Instantiating a new contract
     const provider = new ethers.providers.Web3Provider(library.currentProvider);
@@ -516,14 +519,14 @@ const [hideModal, setShowModal] = useState(true)
         if (e.code === 4001) {
           notifyError("Rejected ORACLE Relic NFT Crafting");
           verifyERC20();
-        }else{
-			toast.dismiss()
-			setTimeout(() => {
-				notifyError('ORACLE Relic NFT Crafting Failed')
-				verifyERC20()
-				setCraftOracleButtonInnerText(true)
-			}, 500);
-		}
+        } else {
+          toast.dismiss();
+          setTimeout(() => {
+            notifyError("ORACLE Relic NFT Crafting Failed");
+            verifyERC20();
+            setCraftOracleButtonInnerText(true);
+          }, 500);
+        }
       }
     } else {
       notifyError("Insufficient MAGE Tokens");
@@ -533,7 +536,7 @@ const [hideModal, setShowModal] = useState(true)
   // Craft Archmage
   async function cratArchmageToken() {
     const isWalletConnected = await checkWalletConnection();
-    if(!isWalletConnected) return;
+    if (!isWalletConnected) return;
 
     // Instantiating a new contract
     const provider = new ethers.providers.Web3Provider(library.currentProvider);
@@ -577,14 +580,14 @@ const [hideModal, setShowModal] = useState(true)
         if (e.code === 4001) {
           notifyError("Rejected ARCHMAGE Relic NFT Crafting");
           verifyERC20();
-        }else{
-			toast.dismiss()
-			setTimeout(() => {
-				notifyError('ARCHMAGE Relic NFT Crafting Failed')
-				verifyERC20()
-				setCraftArchmageButtonInnerText(true)
-			}, 500);
-		}
+        } else {
+          toast.dismiss();
+          setTimeout(() => {
+            notifyError("ARCHMAGE Relic NFT Crafting Failed");
+            verifyERC20();
+            setCraftArchmageButtonInnerText(true);
+          }, 500);
+        }
       }
     } else {
       notifyError("Insufficient MAGE Tokens");
@@ -595,7 +598,7 @@ const [hideModal, setShowModal] = useState(true)
 
   async function upgradeMasterToOracleToken() {
     const isWalletConnected = await checkWalletConnection();
-    if(!isWalletConnected) return;
+    if (!isWalletConnected) return;
 
     // Instantiating a new contract
     const provider = new ethers.providers.Web3Provider(library.currentProvider);
@@ -638,14 +641,14 @@ const [hideModal, setShowModal] = useState(true)
         if (e.code === 4001) {
           notifyError("Rejected MASTER to ORACLE Upgrade");
           verifyERC20();
-        }else{
-			toast.dismiss()
-			setTimeout(() => {
-				notifyError('MASTER to ORACLE Relic NFT Crafting Failed')
-				verifyERC20()
-				setUpgradeMasterToOracleButtonInnerText(true)
-			}, 500);
-		}
+        } else {
+          toast.dismiss();
+          setTimeout(() => {
+            notifyError("MASTER to ORACLE Relic NFT Crafting Failed");
+            verifyERC20();
+            setUpgradeMasterToOracleButtonInnerText(true);
+          }, 500);
+        }
       }
     } else {
       if (masterNFT < 1) notifyError("No MASTER Relic");
@@ -657,7 +660,7 @@ const [hideModal, setShowModal] = useState(true)
 
   async function upgradeOracleToArchmageToken() {
     const isWalletConnected = await checkWalletConnection();
-    if(!isWalletConnected) return;
+    if (!isWalletConnected) return;
 
     // Instantiating a new contract
     const provider = new ethers.providers.Web3Provider(library.currentProvider);
@@ -701,14 +704,14 @@ const [hideModal, setShowModal] = useState(true)
         if (e.code === 4001) {
           notifyError("Rejected ORACLE to ARCHMAGE Upgrade");
           verifyERC20();
-        }else{
-			toast.dismiss()
-			setTimeout(() => {
-				notifyError('ORACLE to ARCHMAGE Relic NFT Crafting Failed')
-				verifyERC20()
-				setUpgradeOracleToArchmageButtonInnerText(true)
-			}, 500);
-		}
+        } else {
+          toast.dismiss();
+          setTimeout(() => {
+            notifyError("ORACLE to ARCHMAGE Relic NFT Crafting Failed");
+            verifyERC20();
+            setUpgradeOracleToArchmageButtonInnerText(true);
+          }, 500);
+        }
       }
     } else {
       if (oracleNFT < 1) notifyError("No ORACLE Relic");
@@ -720,7 +723,7 @@ const [hideModal, setShowModal] = useState(true)
 
   async function UpgradeMasterToArchmageToken() {
     const isWalletConnected = await checkWalletConnection();
-    if(!isWalletConnected) return;
+    if (!isWalletConnected) return;
 
     // Instantiating a new contract
     const provider = new ethers.providers.Web3Provider(library.currentProvider);
@@ -763,14 +766,14 @@ const [hideModal, setShowModal] = useState(true)
         if (e.code === 4001) {
           notifyError("Rejected MASTER to ARCHMAGE Upgrade");
           verifyERC20();
-        }else{
-			toast.dismiss()
-			setTimeout(() => {
-				notifyError('MASTER to ARCHMAGE Relic NFT Crafting Failed')
-				verifyERC20()
-				setUpgradeMasterToArchmageButtonInnerText(true)
-			}, 500);
-		}
+        } else {
+          toast.dismiss();
+          setTimeout(() => {
+            notifyError("MASTER to ARCHMAGE Relic NFT Crafting Failed");
+            verifyERC20();
+            setUpgradeMasterToArchmageButtonInnerText(true);
+          }, 500);
+        }
       }
     } else {
       if (masterNFT < 1) notifyError("No MASTER Relic");
@@ -845,10 +848,10 @@ const [hideModal, setShowModal] = useState(true)
   }
 
   return (
-	<div className="App">
-    <div
-        className={`modalPositionRelative glassmorphism modalWallet ${
-          hideModal ? `hideModal` : false
+    <div className="App">
+      <div
+        className={`glassmorphism modalWallet ${
+          hideModal ? `hideModal` : `showModal`
         }`}
       >
         <button
@@ -857,10 +860,12 @@ const [hideModal, setShowModal] = useState(true)
             setShowModal(!hideModal);
           }}
         >
-          ❌
+          <span className="closeModal">x</span>
         </button>
         <div>
-          <h1 className="modalTitle">Select your wallet</h1>
+          <h1 className="modalTitle text-white Rajdhani-SemiBold">
+            Select Wallet
+          </h1>
           <div className="modalDivButtons">
             <button
               className="modalButton"
@@ -869,12 +874,12 @@ const [hideModal, setShowModal] = useState(true)
               }}
             >
               <img
-                width={30}
+                width={35}
                 className="m-2"
-                src="https://cdn.iconscout.com/icon/free/png-256/metamask-2728406-2261817.png"
+                src="./assets/images/metamask_icon.svg"
                 alt=""
               />
-              Metamask
+              MetaMask
             </button>
             <button
               className="modalButton"
@@ -883,164 +888,324 @@ const [hideModal, setShowModal] = useState(true)
               }}
             >
               <img
-                width={30}
+                width={35}
                 className="m-2"
-                src="https://api.nuget.org/v3-flatcontainer/walletconnect.desktop/1.6.5/icon"
+                src="./assets/images/walletconnect_icon.svg"
                 alt=""
               />
-              Wallet Connect
+              WalletConnect
             </button>
+          </div>
+          <div className="modalHelp">
+            <a
+              href="https://discord.gg/YFWKq5rarm"
+              target="_blank"
+              style={{ color: "#bab9bb" }}
+            >
+              Having Problems Connecting?
+            </a>
+            <a
+              href="https://metamask.io/download"
+              target="_blank"
+              style={{ color: "#5e5e5e" }}
+            >
+              Install MetaMask Extension
+            </a>
           </div>
         </div>
       </div>
-    
-		<main className="meta-body">
-			<header className="meta-header">
-				<div className="meta-logo logo-block">
-					<a href='https://metabrands.io/'>
-						<img src="./assets/images/metabrands_logo_light.svg" className="logo"/>
-					</a>
-				</div>
 
-				<div>
-					<div className="d-flex justify-content-between align-items-center fox-wallet cursorpointer stone-craftown" onClick={() => {active ? resetGeneralDeactive() : setShowModal(!hideModal)}}>
-						<div className="meta-fox d-flex justify-content-center align-items-center">
-							<img src="./assets/images/meta_fox.svg" className="meta-fox-icon"/>
-						</div>
-						<div className="Rajdhani-SemiBold text-white wallet-address">
-							{ error ? getErrorMessage(error) : active ? `${account.substring(0, 6)}...${account.substring(account.length - 6)}` : 'Connect Wallet'}
-						</div>
-					</div>
-					<div className="text-right mt-2">
-					{ addTokenButton ?
-						<div className="cursorpointer" onClick={() => AddTokenToWallet()}>
-							<div className="d-inline-block glow-animation">
-								<img width="30px" src="./assets/images/mage.png" />
-							</div>
-							<div className="d-inline-block text-white wallet-address px-0">
-								{getFlooredFixed(tokenERC20, 0)}
-							</div>
-						</div>
-					: false }
-					</div>
-				</div>
-			</header>
-			<section className="text-sention">
-				<div className="main-title">
-					<h1 className="text-white relic-text Rajdhani-Bold">MAGE RELIC NFTS</h1>
-				</div>
-				<p className="text-block Rajdhani-SemiBold">SACRIFICE MAGE TOKENS TO CLAIM YOUR MULTI-PASS TO THE METAVERSE...</p>
-        <div style={{ marginBottom: "2rem" }}>
-          <a href='https://app.uniswap.org/#/swap?outputCurrency=0xd52aae39a2b5cc7812f7b9450ebb61dfef702b15' target='_BLANK'>
-            <button className="btn-secondary"><img src="./assets/images/uniswap_icon.svg" className="uniswap-icon"/> <span style={{ verticalAlign: "middle" }}>TRADE MAGE</span></button>
-          </a>
-        </div>
-			</section>
-			<section className="art-section row m-0">
-				<div className="col-lg-3 d-flex justify-content-center">
-					<div className="stone">
-						<h4 className="text-white Rajdhani-Bold" style={{ marginTop: "10%" }}>MASTER</h4>
+      <main className="meta-body">
+        <header className="meta-header">
+          <div className="meta-logo logo-block">
+            <a href="https://metabrands.io/">
+              <img
+                src="./assets/images/metabrands_logo_light.svg"
+                className="logo"
+              />
+            </a>
+          </div>
 
-						<p><span className={`${masterNFT ? 'text-green' : 'text-white no-relic'}`}>{masterNFT ? Number(masterNFT) : 0}</span></p>
-						<img src="./assets/images/stone_1.png" className="stone-1" />
-						<div className="d-flex justify-content-center mt-4 mage-block">
-							<img src="./assets/images/mage.png" className="mage-icon" />
-							<p className="mage-text Rajdhani-Medium">10,000 MAGE</p>
-						</div>
-						<button className={`Rajdhani-SemiBold stone-craft ${craftMasterHover ? false : 'disabled'}`} onClick={craftMasterToken}>
-							{craftMasterButtonInnerText ? 'CRAFT' : 'CRAFTING...'}
-						</button>
-
-            { !isCollapsed ?
-              <div className="justify-content-center text-white" style={{marginBottom: "10%"}}>
-                <div className="Rajdhani-Medium pb-1">UPGRADE</div>
-                <img src="./assets/images/icon_upgrade_plus.svg" className="upgrade-icon" onClick={() => setIsCollapsed(!isCollapsed)} />
+          <div>
+            <div
+              className="d-flex justify-content-between align-items-center fox-wallet cursorpointer stone-craftown"
+              onClick={() => {
+                active ? resetGeneralDeactive() : setShowModal(!hideModal);
+              }}
+            >
+              <div className="Rajdhani-SemiBold text-white wallet-address">
+                {error
+                  ? getErrorMessage(error)
+                  : active
+                  ? `${account.substring(0, 6)}...${account.substring(
+                      account.length - 6
+                    )}`
+                  : "Connect Wallet"}
               </div>
-            : false }
-
-            <div className={`collapse-content-${isCollapsed ? 'expanded' : 'hidden'}`} aria-expanded={isCollapsed}>
-              <div className="d-flex justify-content-center mt-3 mage-block">
-                <img src="./assets/images/mage.png" className="mage-icon" />
-                <p className="mage-text Rajdhani-Medium">15,000 MAGE</p>
-              </div>
-              <button className={`Rajdhani-SemiBold stone-craft btn-upgrade ${upgradeFromMasterToOracleHover ? false : 'disabled'}`} onClick={upgradeMasterToOracleToken}>
-                {upgradeMasterToOracleButtonInnerText ? 'UPGRADE TO ORACLE' : 'UPGRADING...'}
-              </button>
-
-              <div className="d-flex justify-content-center mt-3 mage-block">
-                <img src="./assets/images/mage.png" className="mage-icon" />
-                <p className="mage-text Rajdhani-Medium">40,000 MAGE</p>
-              </div>
-              <button className={`Rajdhani-SemiBold stone-craft btn-upgrade ${upgradeFromMasterToArchmageHover ? false : 'disabled'}`} onClick={UpgradeMasterToArchmageToken}>
-                {upgradeMasterToArchmageButtonInnerText ? 'UPGRADE TO ARCHMAGE' : 'UPGRADING...'}
-              </button>
             </div>
-					</div>
-				</div>
-				<div className="col-lg-3 d-flex justify-content-center">
-					<div className="stone t-2">
-						<h4 className="text-white Rajdhani-Bold" style={{ marginTop: "10%" }}>ORACLE</h4>
-						<p><span className={`${oracleNFT ? 'text-green' : 'text-white no-relic'}`}>{oracleNFT ? Number(oracleNFT) : 0}</span></p>
-						<img src="./assets/images/stone_2.png" className="stone-2"/>
-						<div className="d-flex justify-content-around craft-group flexown">
+            <div className="text-right mt-2">
+              {addTokenButton ? (
+                <div
+                  className="cursorpointer"
+                  onClick={() => AddTokenToWallet()}
+                >
+                  <div className="d-inline-block glow-animation">
+                    <img width="30px" src="./assets/images/mage.png" />
+                  </div>
+                  <div className="d-inline-block text-white wallet-address px-0">
+                    {getFlooredFixed(tokenERC20, 0)}
+                  </div>
+                </div>
+              ) : (
+                false
+              )}
+            </div>
+          </div>
+        </header>
+        <section className="text-sention">
+          <div className="main-title">
+            <h1 className="text-white relic-text Rajdhani-Bold">
+              MAGE RELIC NFTS
+            </h1>
+          </div>
+          <p className="text-block Rajdhani-SemiBold">
+            SACRIFICE MAGE TOKENS TO CLAIM YOUR MULTI-PASS TO THE METAVERSE...
+          </p>
+          <div style={{ marginBottom: "2rem" }}>
+            <a
+              href="https://app.uniswap.org/#/swap?outputCurrency=0xd52aae39a2b5cc7812f7b9450ebb61dfef702b15"
+              target="_BLANK"
+            >
+              <button className="btn-secondary">
+                <img
+                  src="./assets/images/uniswap_icon.svg"
+                  className="uniswap-icon"
+                />{" "}
+                <span style={{ verticalAlign: "middle" }}>TRADE MAGE</span>
+              </button>
+            </a>
+          </div>
+        </section>
+        <section className="art-section row m-0">
+          <div className="col-lg-3 d-flex justify-content-center">
+            <div className="stone">
+              <h4
+                className="text-white Rajdhani-Bold"
+                style={{ marginTop: "10%" }}
+              >
+                MASTER
+              </h4>
 
-
-						<div className="d-flex justify-content-center mt-4 mage-block">
-								<img src="./assets/images/mage.png" className="mage-icon" />
-								<p className="mage-text Rajdhani-Medium">25,000 MAGE</p>
-							</div>
-							<button className={`Rajdhani-SemiBold stone-craft ${craftOracleHover ? false : 'disabled'}`} onClick={cratOracleToken}>
-								{craftOracleButtonInnerText ? 'CRAFT' : 'CRAFTING...'}
-							</button>
-
-              { !isCollapsed ?
-              <div className="justify-content-center text-white" style={{marginBottom: "10%"}}>
-                <div className="Rajdhani-Medium pb-1">UPGRADE</div>
-                <img src="./assets/images/icon_upgrade_plus.svg" className="upgrade-icon" onClick={() => setIsCollapsed(!isCollapsed)} />
+              <p>
+                <span
+                  className={`${
+                    masterNFT ? "text-green" : "text-white no-relic"
+                  }`}
+                >
+                  {masterNFT ? Number(masterNFT) : 0}
+                </span>
+              </p>
+              <img src="./assets/images/stone_1.png" className="stone-1" />
+              <div className="d-flex justify-content-center mt-4 mage-block">
+                <img src="./assets/images/mage.png" className="mage-icon" />
+                <p className="mage-text Rajdhani-Medium">10,000 MAGE</p>
               </div>
-              : false }
+              <button
+                className={`Rajdhani-SemiBold stone-craft ${
+                  craftMasterHover ? false : "disabled"
+                }`}
+                onClick={craftMasterToken}
+              >
+                {craftMasterButtonInnerText ? "CRAFT" : "CRAFTING..."}
+              </button>
 
-              <div className={`collapse-content-${isCollapsed ? 'expanded' : 'hidden'}`} aria-expanded={isCollapsed}>
+              {!isCollapsed ? (
+                <div
+                  className="justify-content-center text-white"
+                  style={{ marginBottom: "10%" }}
+                >
+                  <div className="Rajdhani-Medium pb-1">UPGRADE</div>
+                  <img
+                    src="./assets/images/icon_upgrade_plus.svg"
+                    className="upgrade-icon"
+                    onClick={() => setIsCollapsed(!isCollapsed)}
+                  />
+                </div>
+              ) : (
+                false
+              )}
+
+              <div
+                className={`collapse-content-${
+                  isCollapsed ? "expanded" : "hidden"
+                }`}
+                aria-expanded={isCollapsed}
+              >
                 <div className="d-flex justify-content-center mt-3 mage-block">
+                  <img src="./assets/images/mage.png" className="mage-icon" />
+                  <p className="mage-text Rajdhani-Medium">15,000 MAGE</p>
+                </div>
+                <button
+                  className={`Rajdhani-SemiBold stone-craft btn-upgrade ${
+                    upgradeFromMasterToOracleHover ? false : "disabled"
+                  }`}
+                  onClick={upgradeMasterToOracleToken}
+                >
+                  {upgradeMasterToOracleButtonInnerText
+                    ? "UPGRADE TO ORACLE"
+                    : "UPGRADING..."}
+                </button>
+
+                <div className="d-flex justify-content-center mt-3 mage-block">
+                  <img src="./assets/images/mage.png" className="mage-icon" />
+                  <p className="mage-text Rajdhani-Medium">40,000 MAGE</p>
+                </div>
+                <button
+                  className={`Rajdhani-SemiBold stone-craft btn-upgrade ${
+                    upgradeFromMasterToArchmageHover ? false : "disabled"
+                  }`}
+                  onClick={UpgradeMasterToArchmageToken}
+                >
+                  {upgradeMasterToArchmageButtonInnerText
+                    ? "UPGRADE TO ARCHMAGE"
+                    : "UPGRADING..."}
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="col-lg-3 d-flex justify-content-center">
+            <div className="stone t-2">
+              <h4
+                className="text-white Rajdhani-Bold"
+                style={{ marginTop: "10%" }}
+              >
+                ORACLE
+              </h4>
+              <p>
+                <span
+                  className={`${
+                    oracleNFT ? "text-green" : "text-white no-relic"
+                  }`}
+                >
+                  {oracleNFT ? Number(oracleNFT) : 0}
+                </span>
+              </p>
+              <img src="./assets/images/stone_2.png" className="stone-2" />
+              <div className="d-flex justify-content-around craft-group flexown">
+                <div className="d-flex justify-content-center mt-4 mage-block">
                   <img src="./assets/images/mage.png" className="mage-icon" />
                   <p className="mage-text Rajdhani-Medium">25,000 MAGE</p>
                 </div>
-                <button className={`Rajdhani-SemiBold stone-craft btn-upgrade ${upgradeFromOracleToArchmageHover ? false : 'disabled'}`} onClick={upgradeOracleToArchmageToken}>
-                  {upgradeOracleToArchmageButtonInnerText ? 'UPGRADE TO ARCHMAGE' : 'UPGRADING...'}
+                <button
+                  className={`Rajdhani-SemiBold stone-craft ${
+                    craftOracleHover ? false : "disabled"
+                  }`}
+                  onClick={cratOracleToken}
+                >
+                  {craftOracleButtonInnerText ? "CRAFT" : "CRAFTING..."}
+                </button>
+
+                {!isCollapsed ? (
+                  <div
+                    className="justify-content-center text-white"
+                    style={{ marginBottom: "10%" }}
+                  >
+                    <div className="Rajdhani-Medium pb-1">UPGRADE</div>
+                    <img
+                      src="./assets/images/icon_upgrade_plus.svg"
+                      className="upgrade-icon"
+                      onClick={() => setIsCollapsed(!isCollapsed)}
+                    />
+                  </div>
+                ) : (
+                  false
+                )}
+
+                <div
+                  className={`collapse-content-${
+                    isCollapsed ? "expanded" : "hidden"
+                  }`}
+                  aria-expanded={isCollapsed}
+                >
+                  <div className="d-flex justify-content-center mt-3 mage-block">
+                    <img src="./assets/images/mage.png" className="mage-icon" />
+                    <p className="mage-text Rajdhani-Medium">25,000 MAGE</p>
+                  </div>
+                  <button
+                    className={`Rajdhani-SemiBold stone-craft btn-upgrade ${
+                      upgradeFromOracleToArchmageHover ? false : "disabled"
+                    }`}
+                    onClick={upgradeOracleToArchmageToken}
+                  >
+                    {upgradeOracleToArchmageButtonInnerText
+                      ? "UPGRADE TO ARCHMAGE"
+                      : "UPGRADING..."}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-lg-3 d-flex justify-content-center">
+            <div className="stone t-2">
+              <h4
+                className="text-white Rajdhani-Bold"
+                style={{ marginTop: "10%" }}
+              >
+                ARCHMAGE
+              </h4>
+              <p>
+                <span
+                  className={`${
+                    archmageNFT ? "text-green" : "text-white no-relic"
+                  }`}
+                >
+                  {archmageNFT ? Number(archmageNFT) : 0}
+                </span>{" "}
+              </p>
+              <img src="./assets/images/stone_3.png" className="stone-3" />
+              <div className="d-flex justify-content-center mt-4 mage-block">
+                <img src="./assets/images/mage.png" className="mage-icon" />
+                <p className="mage-text Rajdhani-Medium">50,000 MAGE</p>
+              </div>
+              <div className="d-flex justify-content-around craft-group">
+                <button
+                  className={`Rajdhani-SemiBold stone-craft ${
+                    craftArchmageHover ? false : "disabled"
+                  }`}
+                  onClick={cratArchmageToken}
+                >
+                  {craftArchmageButtonInnerText ? "CRAFT" : "CRAFTING..."}
                 </button>
               </div>
-						</div>
-
-					</div>
-				</div>
-				<div className="col-lg-3 d-flex justify-content-center">
-					<div className="stone t-2">
-						<h4 className="text-white Rajdhani-Bold" style={{ marginTop: "10%" }}>ARCHMAGE</h4>
-						<p><span className={`${archmageNFT ? 'text-green' : 'text-white no-relic'}`}>{archmageNFT ? Number(archmageNFT) : 0}</span> </p>
-						<img src="./assets/images/stone_3.png" className="stone-3" />
-						<div className="d-flex justify-content-center mt-4 mage-block">
-							<img src="./assets/images/mage.png" className="mage-icon" />
-							<p className="mage-text Rajdhani-Medium">50,000 MAGE</p>
-						</div>
-						<div className="d-flex justify-content-around craft-group">
-							<button className={`Rajdhani-SemiBold stone-craft ${craftArchmageHover ? false : 'disabled'}`} onClick={cratArchmageToken}>
-								{craftArchmageButtonInnerText ? 'CRAFT' : 'CRAFTING...'}
-							</button>
-						</div>
-					</div>
-				</div>
-			</section>
-			<section className="learn-more-section text-center">
-				<p className="paper-text Rajdhani-Medium">LEARN MORE ABOUT MAGE RELIC NFTS</p>
-				<img src="./assets/images/mb_scroll.png" className="mb-scroll" />
-				<a href='https://whitepaper.metabrands.io/' target='_BLANK'><button className="btn-secondary">WHITE PAPER</button></a>
-			</section>
-			<footer className="foot-text Rajdhani-Medium">
-				<p>
-					Disclaimer: BY USING THIS SITE AND INTERACTING WITH THE METABRANDS PLATFORM OR ECOSYSTEM, YOU UNDERSTAND AND ARE INHERENTLY ASSUMING THE RISKS INVOLVED SUCH AS TECHNICAL ISSUES THAT COULD NOT FUNCTION AS NORMALLY EXPECTED OR A COMPLETE LOSS OF VALUE FROM THE TIME OF CRAFTING/MINTING YOUR RELIC BY SACRIFICING MAGE TOKENS, AND YOU ARE AGREEING THAT THE TOKENS/NFTS PRESENT FUNCTIONALITY MIGHT BE ALL THEY ARE EVER CAPABLE OF DOING. IF YOU PURCHASE ANY OF THE TOKENS/NFTS, YOU AGREE THAT YOU ARE IN GOOD FINANCIAL STANDING AND YOU WILL NOT ASSERT ANY CLAIM, ACTION, JUDGEMENT OR REMEDY AGAINST METABRANDS OR ITS SPONSORS IF THE TOKEN/NFTS LOSE VALUE, THE METABRANDS PLATFORM OR NETWORK CEASES TO FUNCTION, OR IF THE PLATFORM DOES NOT ULTIMATELY MEET EXPECTATIONS.
-				</p>
-			</footer>
-		</main>
-	</div>
+            </div>
+          </div>
+        </section>
+        <section className="learn-more-section text-center">
+          <p className="paper-text Rajdhani-Medium">
+            LEARN MORE ABOUT MAGE RELIC NFTS
+          </p>
+          <img src="./assets/images/mb_scroll.png" className="mb-scroll" />
+          <a href="https://whitepaper.metabrands.io/" target="_BLANK">
+            <button className="btn-secondary">WHITE PAPER</button>
+          </a>
+        </section>
+        <footer className="foot-text Rajdhani-Medium">
+          <p>
+            Disclaimer: BY USING THIS SITE AND INTERACTING WITH THE METABRANDS
+            PLATFORM OR ECOSYSTEM, YOU UNDERSTAND AND ARE INHERENTLY ASSUMING
+            THE RISKS INVOLVED SUCH AS TECHNICAL ISSUES THAT COULD NOT FUNCTION
+            AS NORMALLY EXPECTED OR A COMPLETE LOSS OF VALUE FROM THE TIME OF
+            CRAFTING/MINTING YOUR RELIC BY SACRIFICING MAGE TOKENS, AND YOU ARE
+            AGREEING THAT THE TOKENS/NFTS PRESENT FUNCTIONALITY MIGHT BE ALL
+            THEY ARE EVER CAPABLE OF DOING. IF YOU PURCHASE ANY OF THE
+            TOKENS/NFTS, YOU AGREE THAT YOU ARE IN GOOD FINANCIAL STANDING AND
+            YOU WILL NOT ASSERT ANY CLAIM, ACTION, JUDGEMENT OR REMEDY AGAINST
+            METABRANDS OR ITS SPONSORS IF THE TOKEN/NFTS LOSE VALUE, THE
+            METABRANDS PLATFORM OR NETWORK CEASES TO FUNCTION, OR IF THE
+            PLATFORM DOES NOT ULTIMATELY MEET EXPECTATIONS.
+          </p>
+        </footer>
+      </main>
+    </div>
   );
 }

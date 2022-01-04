@@ -1,0 +1,87 @@
+.glassmorphism {
+  background: #21142b;
+  border-radius: 10px;
+  border: 1px solid #3d2551;
+}
+
+.modalTitle {
+  font-size: 1.5rem;
+  padding-top: 45px;
+  padding-bottom: 40px;
+  margin-bottom: 0;
+}
+
+.modalbackgroundInvisible {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  top: -5px;
+  right: 0;
+  padding-right: 15px;
+  z-index: 998;
+}
+
+.closeModal {
+  color: #3d2551;
+  font-size: 1.75rem;
+}
+
+.modalWallet {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 375px;
+  z-index: 999;
+}
+
+.modalButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 65%;
+  height: 55px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  transition: 0.5s;
+  border: 1px solid #3ecfcb;
+  background-color: transparent;
+  color: #fff;
+}
+
+.modalButton:hover {
+  background-color: #3ecfcb;
+}
+
+.modalHelp {
+  padding-top: 45px;
+}
+
+.modalHelp a {
+  display: block;
+  font-size: 0.75rem;
+  color: white;
+  text-decoration: none;
+  padding-bottom: 6px;
+}
+
+.hideModal {
+  display: none;
+}
+
+.modalDivButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+@media (max-width: 360px) {
+  .modalWallet {
+    width: 100%;
+    height: 100%;
+  }
+}
